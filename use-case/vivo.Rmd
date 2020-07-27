@@ -25,7 +25,6 @@ head(titanic_imputed)
 library(DALEX)
 library(vivo)
 library(randomForest)
-library(ingredients)
 
 set.seed(123)
 ```
