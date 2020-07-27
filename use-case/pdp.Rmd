@@ -31,14 +31,14 @@ set.seed(123)
 Fit a random forest to the titanic imputed data.
 
 ```{r}
-rf <- randomForest(survived~., data = titanic_imputed)
+rf_model <- randomForest(survived~., data = titanic_imputed)
 ```
 
 
 Use pdp's partial function for `fare` and `age` variables.
 
 ```{r}
-rf_pdp <- partial(rf, pred.var = c("fare"), ice = TRUE)
+rf_pdp <- partial(rf_model, pred.var = c("fare"), ice = TRUE)
 ```
 
 Plot PDP with ICE curves.
@@ -58,7 +58,7 @@ autoplot(rf_pdp)
 Extract the most important predictors.
 
 ```{r}
-topPredictors(rf, n = 3)
+topPredictors(rf_model, n = 3)
 ```
 
 
