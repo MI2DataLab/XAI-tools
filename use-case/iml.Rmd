@@ -2,7 +2,10 @@
 title: "iml"
 author: "Alicja Gosiewska"
 date: "27 07 2020"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 
@@ -12,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 
 
-### Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
 
 ```{r}
 data(titanic_imputed, package = "DALEX")
@@ -29,20 +32,22 @@ library(ggplot2)
 set.seed(123)
 ```
 
-### Fit a random forest to the titanic imputed data.
+Fit a random forest to the titanic imputed data.
 
 ```{r}
 rf_model <- randomForest(survived~., data = titanic_imputed)
 ```
 
-### We create a Predictor object, that holds the model and the data.
+Create a Predictor object, that holds the model and the data.
 
 ```{r}
 X <- titanic_imputed[which(names(titanic_imputed) != "survived")]
 predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
 ```
 
-### Calculatre feature importance
+# Model parts
+
+## Variable importance
 
 ```{r}
 imp <- FeatureImp$new(predictor, loss = "mae")
@@ -53,15 +58,7 @@ plot(imp)
 imp$results
 ```
 
-
-### Plot ALE.
-
-```{r}
-ale <- FeatureEffect$new(predictor, feature = "fare")
-plot(ale)
-```
-
-### Measure interactions.
+## Interaction measure
 
 
 ```{r}
@@ -70,7 +67,32 @@ plot(interact)
 ```
 
 
-### Train surrogate model.
+## 2-way interaction measure
+
+```{r}
+interact <- Interaction$new(predictor, feature = "age")
+plot(interact)
+```
+
+
+# Model profile
+
+## PDP
+
+```{r}
+ale <- FeatureEffect$new(predictor, feature = "fare", method = "pdp")
+plot(ale)
+```
+
+## ALE
+
+```{r}
+ale <- FeatureEffect$new(predictor, feature = "fare")
+plot(ale)
+```
+
+
+## Surrogate for the whole model
 
 ```{r}
 tree <- TreeSurrogate$new(predictor, maxdepth = 2)
@@ -78,7 +100,10 @@ plot(tree)
 ```
 
 
-### Explain single observation with LIME.
+
+# Predict parts
+
+## LIME
 
 
 ```{r}
@@ -92,7 +117,7 @@ lime$results
 ```
 
 
-### Explain single observation with SHAP.
+## SHAP
 
 
 ```{r}

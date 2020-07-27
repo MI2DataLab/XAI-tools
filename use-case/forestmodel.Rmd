@@ -2,7 +2,10 @@
 title: "forestmodel"
 author: "Alicja Gosiewska"
 date: "27 07 2020"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -11,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 
 
-### Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
 
 ```{r}
 data(titanic_imputed, package = "DALEX")
@@ -24,13 +27,15 @@ library(forestmodel)
 ```
 
 
-### Fit a logistic regression to the titanic imputed data.
+Fit a logistic regression to the titanic imputed data.
 
 ```{r}
 glm_model <- glm(survived~., data = titanic_imputed)
 ```
 
-### Produce a forest plot based on a loistic regression model.
+# Variable importance
+
+## Forest plot
 
 
 ```{r}

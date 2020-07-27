@@ -1,11 +1,8 @@
 ---
-title: "pdp"
+title: "lime"
 author: "Alicja Gosiewska"
 date: "27 07 2020"
-output:
-  html_document:
-    toc: true
-    toc_float: true
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -24,9 +21,8 @@ head(titanic_imputed)
 
 
 ```{r}
-library(pdp)
+library(lime)
 library(randomForest)
-library(ggplot2)
 
 set.seed(123)
 ```
@@ -38,39 +34,30 @@ rf_model <- randomForest(survived~., data = titanic_imputed)
 ```
 
 
-Use pdp's partial function for `fare` and `age` variables.
+
+# Predict parts
+
+## LIME
 
 ```{r}
-rf_pdp <- partial(rf_model, pred.var = c("fare"), ice = TRUE)
+rf_lime <- lime(titanic_imputed, rf_model)
+predict_model.randomForest <- function(x, newdata, type = "prob"){
+  as.data.frame(predict(x, newdata = newdata))
+}
+model_type.randomForest <- function(x, ...) 'classification'
 ```
 
 
-# Model parts
-
-## Variable importance
-
-Extract the most important predictors.
-
 ```{r}
-topPredictors(rf_model, n = 3)
+explanations <- explain(titanic_imputed[1:4,], rf_lime, n_labels = 1, n_features = 5)
 ```
 
-
-
-# Model profile
-
-## PDP with ICE curves.
-
 ```{r}
-plotPartial(rf_pdp)
+plot_features(explanations)
 ```
 
-Use `autoplot` function to produce PDP with `ggplot2`.
-
 ```{r}
-autoplot(rf_pdp)
+plot_explanations(explanations)
 ```
-
-
 
 
