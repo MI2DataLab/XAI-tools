@@ -10,3 +10,60 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
 
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+
+```{r}
+library(pdp)
+library(randomForest)
+library(ggplot2)
+
+set.seed(123)
+```
+
+Fit a random forest to the titanic imputed data.
+
+```{r}
+rf <- randomForest(survived~., data = titanic_imputed)
+```
+
+
+Use pdp's partial function for `fare` and `age` variables.
+
+```{r}
+rf_pdp <- partial(rf, pred.var = c("fare"), ice = TRUE)
+```
+
+Plot PDP with ICE curves.
+
+```{r}
+plotPartial(rf_pdp)
+```
+
+Use `autoplot` function to produce PDP with `ggplot2`.
+
+```{r}
+autoplot(rf_pdp)
+```
+
+
+
+Extract the most important predictors.
+
+```{r}
+topPredictors(rf, n = 3)
+```
+
+
+```{r}
+sessionInfo()
+```
+
+
