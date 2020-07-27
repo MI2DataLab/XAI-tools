@@ -1,0 +1,81 @@
+---
+title: "vivo"
+author: "Alicja Gosiewska"
+date: "27 07 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+
+```{r}
+library(DALEX)
+library(vivo)
+library(randomForest)
+library(ingredients)
+
+set.seed(123)
+```
+
+Fit a random forest and logistic regression to the titanic imputed data.
+
+```{r}
+rf_model <- randomForest(survived~., data = titanic_imputed)
+glm_model <- glm(survived~., data = titanic_imputed)
+```
+
+Prepare explainers.
+
+```{r}
+explainer_rf <- DALEX::explain(rf_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8])
+explainer_glm <- DALEX::explain(glm_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8])
+```
+
+
+# Model parts
+
+## Variable importance
+
+
+```{r}
+profiles_global_rf <- model_profile(explainer_rf, variables = c("age", "fare"))
+profiles_global_glm <- model_profile(explainer_glm, variables = c("age", "fare"))
+
+measure_global_rf <- global_variable_importance(profiles_global_rf)
+measure_global_glm <- global_variable_importance(profiles_global_glm)
+
+plot(measure_global_rf, measure_global_glm)
+```
+
+
+
+
+# Predict parts
+
+## Local variable importance
+
+```{r}
+profiles_rf <- DALEX::predict_profile(explainer_rf, titanic_imputed[1,])
+profiles_glm <- DALEX::predict_profile(explainer_glm, titanic_imputed[1,])
+
+measure_rf <- local_variable_importance(profiles_rf, titanic_imputed[ ,-8])
+measure_glm <- local_variable_importance(profiles_glm, titanic_imputed[ ,-8])
+
+plot(measure_rf, measure_glm, color = "_label_model_")
+```
+
