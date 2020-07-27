@@ -1,0 +1,102 @@
+---
+title: "iml"
+author: "Alicja Gosiewska"
+date: "27 07 2020"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+
+
+### Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+
+```{r}
+library(iml)
+library(randomForest)
+library(ggplot2)
+
+set.seed(123)
+```
+
+### Fit a random forest to the titanic imputed data.
+
+```{r}
+rf_model <- randomForest(survived~., data = titanic_imputed)
+```
+
+### We create a Predictor object, that holds the model and the data.
+
+```{r}
+X <- titanic_imputed[which(names(titanic_imputed) != "survived")]
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
+```
+
+### Calculatre feature importance
+
+```{r}
+imp <- FeatureImp$new(predictor, loss = "mae")
+plot(imp)
+```
+
+```{r}
+imp$results
+```
+
+
+### Plot ALE.
+
+```{r}
+ale <- FeatureEffect$new(predictor, feature = "fare")
+plot(ale)
+```
+
+### Measure interactions.
+
+
+```{r}
+interact <- Interaction$new(predictor)
+plot(interact)
+```
+
+
+### Train surrogate model.
+
+```{r}
+tree <- TreeSurrogate$new(predictor, maxdepth = 2)
+plot(tree)
+```
+
+
+### Explain single observation with LIME.
+
+
+```{r}
+lime <- LocalModel$new(predictor, x.interest = X[1, ])
+plot(lime)
+```
+
+
+```{r}
+lime$results
+```
+
+
+### Explain single observation with SHAP.
+
+
+```{r}
+shapley <- Shapley$new(predictor, x.interest = X[1, ])
+plot(shapley)
+```
+
