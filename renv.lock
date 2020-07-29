@@ -490,6 +490,13 @@
       "Repository": "CRAN",
       "Hash": "61e4a10781dd00d7d81dd06ca9b94e95"
     },
+    "mcr": {
+      "Package": "mcr",
+      "Version": "1.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2f9c13af97820aaebaf3f3c356d99d5f"
+    },
     "mgcv": {
       "Package": "mgcv",
       "Version": "1.8-31",

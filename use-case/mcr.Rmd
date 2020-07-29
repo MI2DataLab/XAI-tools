@@ -1,0 +1,64 @@
+---
+title: "mcr"
+author: "Alicja Gosiewska"
+date: "29 07 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(creatinine,package="mcr")
+x <- creatinine$serum.crea
+y <- creatinine$plasma.crea
+
+head(data.frame(x, y))
+```
+
+
+
+```{r}
+library(mcr)
+library(randomForest)
+
+set.seed(123)
+```
+
+
+
+
+# Model diagnostics
+
+```{r}
+
+model1 <- mcreg(x,y,error.ratio=1,method.reg="Deming", method.ci="analytical",
+               mref.name = "serum.crea", mtest.name = "plasma.crea", na.rm=TRUE)
+
+printSummary(model1)
+
+plot(model1)
+
+plotBias(model1)
+
+plotResiduals(model1)
+
+plotDifference(model1)
+
+```
+
+Comparison of models.
+
+```{r}
+model2 <- mcreg(x,y,error.ratio=1,method.reg="Deming",
+               method.ci="bootstrap", method.bootstrap.ci = "BCa",
+               mref.name = "serum.crea", mtest.name = "plasma.crea", na.rm=TRUE)
+compareFit(model1, model2)
+```
+
