@@ -1,0 +1,56 @@
+---
+title: "ALEPlot"
+author: "Szymon Maksymiuk"
+date: "29 07 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+```{r}
+library(ALEPlot)
+```
+
+
+Fit a forest type model to the titanic imputed data.
+
+```{r}
+ranger_model <- ranger::ranger(survived~., data = titanic_imputed, classification = TRUE, probability = TRUE)
+```
+
+# Model Profile
+
+## ALE Plot
+
+
+```{r}
+X <- titanic_imputed[which(names(titanic_imputed) != "survived")]
+
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+
+ALEPlot_1 <- ALEPlot(X = X, X.model = ranger_model, J = c(5), pred.fun = pred_fun)
+ALEPlot_2 <- ALEPlot(X = X, X.model = ranger_model, J = c(1), pred.fun = pred_fun)
+```
+
+
+
+
+
+
