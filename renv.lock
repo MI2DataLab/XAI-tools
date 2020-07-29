@@ -352,6 +352,13 @@
       "Repository": "CRAN",
       "Hash": "4dc5bb88961e347a0f4d8aad597cbfac"
     },
+    "hms": {
+      "Package": "hms",
+      "Version": "0.5.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "726671f634529d470545f9fd1a9d1869"
+    },
     "htmltools": {
       "Package": "htmltools",
       "Version": "0.4.0",
@@ -518,6 +525,13 @@
       "Repository": "CRAN",
       "Hash": "224cfadbf8780b0b1cb9c556d73fe23e"
     },
+    "modelStudio": {
+      "Package": "modelStudio",
+      "Version": "1.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "56e3e8d8b104bb9c749054c8a64f61e7"
+    },
     "munsell": {
       "Package": "munsell",
       "Version": "0.5.0",
@@ -616,6 +630,13 @@
       "Repository": "CRAN",
       "Hash": "f4f13345fcb00c51ace12f65dd18749f"
     },
+    "progress": {
+      "Package": "progress",
+      "Version": "1.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "14dc9f7a3c91ebb14ec5bb9208a07061"
+    },
     "promises": {
       "Package": "promises",
       "Version": "1.1.0",
@@ -636,6 +657,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "22aca7d1181718e927d403a8c2d69d62"
+    },
+    "r2d3": {
+      "Package": "r2d3",
+      "Version": "0.2.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "967952f9dcb9a201925d583e73b4e927"
     },
     "randomForest": {
       "Package": "randomForest",

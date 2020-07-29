@@ -1,0 +1,78 @@
+---
+title: "modelStudio"
+author: "Alicja Gosiewska"
+date: "29 07 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+
+```{r}
+library(DALEX)
+library(modelStudio)
+library(randomForest)
+
+set.seed(123)
+```
+
+Fit a random forest and logistic regression to the titanic imputed data.
+
+```{r}
+rf_model <- randomForest(survived~., data = titanic_imputed)
+```
+
+
+```{r}
+explainer_rf <- DALEX::explain(rf_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8], verbose = FALSE)
+ms <- modelStudio(explainer_rf)
+r2d3::save_d3_html(ms, file = "./modelStudio_titanic.html")
+```
+
+The generated modelStudio is avialible at: TODO
+
+ModelStudio provides various explanation methods listed below as headers.
+
+# Model parts
+
+## Permutational variable importance
+
+# Model profile
+
+## PDP
+
+## ALE
+
+# Predict parts
+
+## SHAP
+
+## Brek Down
+
+# Predict Profile
+
+## Ceteris Paribus
+
+
+
+
+
+
+
+
+
+

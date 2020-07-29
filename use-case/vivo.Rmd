@@ -40,9 +40,11 @@ Prepare explainers.
 
 ```{r}
 explainer_rf <- DALEX::explain(rf_model,
-                        data = titanic_imputed[, -8], y = titanic_imputed[, 8])
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8],
+                        verbose = FALSE)
 explainer_glm <- DALEX::explain(glm_model,
-                        data = titanic_imputed[, -8], y = titanic_imputed[, 8])
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8],
+                        verbose = FALSE)
 ```
 
 
