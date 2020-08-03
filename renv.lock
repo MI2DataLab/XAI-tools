@@ -9,6 +9,13 @@
     ]
   },
   "Packages": {
+    "ALEPlot": {
+      "Package": "ALEPlot",
+      "Version": "1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "dde647d85f0e4abf20fe35b1afc7de22"
+    },
     "BBmisc": {
       "Package": "BBmisc",
       "Version": "1.11",
@@ -672,6 +679,13 @@
       "Repository": "CRAN",
       "Hash": "6367ba8128568cc5ebf8082e440948e4"
     },
+    "ranger": {
+      "Package": "ranger",
+      "Version": "0.12.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "561326df07a5bc5266ba17ce3b81cbf1"
+    },
     "renv": {
       "Package": "renv",
       "Version": "0.11.0",
@@ -854,12 +868,26 @@
       "Repository": "CRAN",
       "Hash": "ccd8453a7b9e380628f6cd2862e46cad"
     },
+    "xgboost": {
+      "Package": "xgboost",
+      "Version": "0.90.0.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1f29db60e440a590f98511b44595f0f3"
+    },
     "xtable": {
       "Package": "xtable",
       "Version": "1.8-4",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "b8acdf8af494d9ec19ccb2481a9b11c2"
+    },
+    "yaImpute": {
+      "Package": "yaImpute",
+      "Version": "1.0-32",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "d2e4d327457708d90e2d5b88807e5219"
     },
     "yaml": {
       "Package": "yaml",

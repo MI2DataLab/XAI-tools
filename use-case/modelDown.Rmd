@@ -1,0 +1,70 @@
+---
+title: "modelDown"
+author: "Alicja Gosiewska"
+date: "29 07 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+
+```{r}
+library(DALEX)
+library(modelDown)
+library(randomForest)
+
+set.seed(123)
+```
+
+Fit a random forest and logistic regression to the titanic imputed data.
+
+```{r}
+rf_model <- randomForest(survived~., data = titanic_imputed)
+```
+
+
+```{r}
+explainer_rf <- DALEX::explain(rf_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8], verbose = FALSE)
+modelDown(explainer_rf, output_folder = "modelDown")
+```
+
+The generated modelDown is avialible at: TODO
+
+modelDown provides various explanation methods listed below as headers.
+
+
+
+# Model parts
+
+## Variable importance 
+
+# Model profile
+
+## PDP
+
+## ALE
+
+# Model diagnostics
+
+## Cumulative distribution of residuals
+
+## Boxplot of residuals
+
+
+
+
+
