@@ -36,16 +36,7 @@ rf_model <- randomForest(survived~., data = titanic_imputed)
 glm_model <- glm(survived~., data = titanic_imputed)
 ```
 
-Prepare explainers.
 
-```{r}
-explainer_rf <- DALEX::explain(rf_model,
-                        data = titanic_imputed[, -8], y = titanic_imputed[, 8],
-                        verbose = FALSE)
-explainer_glm <- DALEX::explain(glm_model,
-                        data = titanic_imputed[, -8], y = titanic_imputed[, 8],
-                        verbose = FALSE)
-```
 
 
 # Model parts
@@ -54,6 +45,13 @@ explainer_glm <- DALEX::explain(glm_model,
 
 
 ```{r}
+explainer_rf <- DALEX::explain(rf_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8],
+                        verbose = FALSE)
+explainer_glm <- DALEX::explain(glm_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8],
+                        verbose = FALSE)
+
 profiles_global_rf <- model_profile(explainer_rf, variables = c("age", "fare"))
 profiles_global_glm <- model_profile(explainer_glm, variables = c("age", "fare"))
 
@@ -71,6 +69,13 @@ plot(measure_global_rf, measure_global_glm)
 ## Local variable importance
 
 ```{r}
+explainer_rf <- DALEX::explain(rf_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8],
+                        verbose = FALSE)
+explainer_glm <- DALEX::explain(glm_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8],
+                        verbose = FALSE)
+
 profiles_rf <- DALEX::predict_profile(explainer_rf, titanic_imputed[1,])
 profiles_glm <- DALEX::predict_profile(explainer_glm, titanic_imputed[1,])
 

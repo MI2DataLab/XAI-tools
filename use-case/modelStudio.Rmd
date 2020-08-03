@@ -61,7 +61,7 @@ ModelStudio provides various explanation methods listed below as headers.
 
 ## SHAP
 
-## Brek Down
+## Break Down
 
 # Predict Profile
 

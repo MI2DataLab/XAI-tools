@@ -1535,18 +1535,18 @@ set.seed(123)</code></pre>
 <p>Fit a random forest and logistic regression to the titanic imputed data.</p>
 <pre class="r"><code>rf_model &lt;- randomForest(survived~., data = titanic_imputed)
 glm_model &lt;- glm(survived~., data = titanic_imputed)</code></pre>
-<p>Prepare explainers.</p>
+<div id="model-parts" class="section level1">
+<h1>Model parts</h1>
+<div id="variable-importance" class="section level2">
+<h2>Variable importance</h2>
 <pre class="r"><code>explainer_rf &lt;- DALEX::explain(rf_model,
                         data = titanic_imputed[, -8], y = titanic_imputed[, 8],
                         verbose = FALSE)
 explainer_glm &lt;- DALEX::explain(glm_model,
                         data = titanic_imputed[, -8], y = titanic_imputed[, 8],
-                        verbose = FALSE)</code></pre>
-<div id="model-parts" class="section level1">
-<h1>Model parts</h1>
-<div id="variable-importance" class="section level2">
-<h2>Variable importance</h2>
-<pre class="r"><code>profiles_global_rf &lt;- model_profile(explainer_rf, variables = c(&quot;age&quot;, &quot;fare&quot;))
+                        verbose = FALSE)
+
+profiles_global_rf &lt;- model_profile(explainer_rf, variables = c(&quot;age&quot;, &quot;fare&quot;))
 profiles_global_glm &lt;- model_profile(explainer_glm, variables = c(&quot;age&quot;, &quot;fare&quot;))
 
 measure_global_rf &lt;- global_variable_importance(profiles_global_rf)
@@ -1560,7 +1560,14 @@ plot(measure_global_rf, measure_global_glm)</code></pre>
 <h1>Predict parts</h1>
 <div id="local-variable-importance" class="section level2">
 <h2>Local variable importance</h2>
-<pre class="r"><code>profiles_rf &lt;- DALEX::predict_profile(explainer_rf, titanic_imputed[1,])
+<pre class="r"><code>explainer_rf &lt;- DALEX::explain(rf_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8],
+                        verbose = FALSE)
+explainer_glm &lt;- DALEX::explain(glm_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8],
+                        verbose = FALSE)
+
+profiles_rf &lt;- DALEX::predict_profile(explainer_rf, titanic_imputed[1,])
 profiles_glm &lt;- DALEX::predict_profile(explainer_glm, titanic_imputed[1,])
 
 measure_rf &lt;- local_variable_importance(profiles_rf, titanic_imputed[ ,-8])

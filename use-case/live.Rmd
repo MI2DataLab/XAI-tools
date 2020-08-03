@@ -42,6 +42,7 @@ rf_model <- randomForest(survived~., data = titanic_imputed)
 
 ## LIVE explanation
 
+
 ```{r}
 similar <- sample_locally(data = titanic_imputed,
                           explained_instance = titanic_imputed[1, ],
@@ -51,9 +52,6 @@ similar1 <- add_predictions(to_explain = similar,
                             black_box_model = rf_model)
 explanation <- fit_explanation(live_object = similar1,
                              white_box = "regr.lm")
-```
-
-```{r}
 plot(explanation, type = "forest")
 ```
 
@@ -61,6 +59,15 @@ plot(explanation, type = "forest")
 
 
 ```{r}
+similar <- sample_locally(data = titanic_imputed,
+                          explained_instance = titanic_imputed[1, ],
+                          explained_var = "survived",
+                          size = 500)
+similar1 <- add_predictions(to_explain = similar,
+                            black_box_model = rf_model)
+explanation <- fit_explanation(live_object = similar1,
+                             white_box = "regr.lm")
+
 plot(explanation, type = "waterfall")
 ```
 

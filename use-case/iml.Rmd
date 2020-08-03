@@ -38,11 +38,8 @@ Fit a random forest to the titanic imputed data.
 rf_model <- randomForest(survived~., data = titanic_imputed)
 ```
 
-Create a Predictor object, that holds the model and the data.
-
 ```{r}
 X <- titanic_imputed[which(names(titanic_imputed) != "survived")]
-predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
 ```
 
 # Model parts
@@ -50,18 +47,18 @@ predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
 ## Variable importance
 
 ```{r}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
 imp <- FeatureImp$new(predictor, loss = "mae")
 plot(imp)
-```
-
-```{r}
 imp$results
 ```
+
 
 ## Interaction measure
 
 
 ```{r}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
 interact <- Interaction$new(predictor)
 plot(interact)
 ```
@@ -70,6 +67,7 @@ plot(interact)
 ## 2-way interaction measure
 
 ```{r}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
 interact <- Interaction$new(predictor, feature = "age")
 plot(interact)
 ```
@@ -80,6 +78,7 @@ plot(interact)
 ## PDP
 
 ```{r}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
 ale <- FeatureEffect$new(predictor, feature = "fare", method = "pdp")
 plot(ale)
 ```
@@ -87,6 +86,7 @@ plot(ale)
 ## ALE
 
 ```{r}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
 ale <- FeatureEffect$new(predictor, feature = "fare")
 plot(ale)
 ```
@@ -95,6 +95,7 @@ plot(ale)
 ## Surrogate for the whole model
 
 ```{r}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
 tree <- TreeSurrogate$new(predictor, maxdepth = 2)
 plot(tree)
 ```
@@ -107,20 +108,20 @@ plot(tree)
 
 
 ```{r}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
 lime <- LocalModel$new(predictor, x.interest = X[1, ])
 plot(lime)
-```
-
-
-```{r}
 lime$results
 ```
+
+
 
 
 ## SHAP
 
 
 ```{r}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
 shapley <- Shapley$new(predictor, x.interest = X[1, ])
 plot(shapley)
 ```

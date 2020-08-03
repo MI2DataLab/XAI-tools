@@ -43,15 +43,27 @@ model1 <- mcreg(x,y,error.ratio=1,method.reg="Deming", method.ci="analytical",
 
 printSummary(model1)
 
-plot(model1)
-
-plotBias(model1)
-
-plotResiduals(model1)
-
-plotDifference(model1)
 
 ```
+```{r}
+plot(model1)
+```
+
+
+```{r}
+plotBias(model1)
+
+```
+
+
+```{r}
+plotResiduals(model1)
+```
+
+```{r}
+plotDifference(model1)
+```
+
 
 Comparison of models.
 
