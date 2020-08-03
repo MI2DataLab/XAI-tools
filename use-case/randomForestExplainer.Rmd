@@ -1,0 +1,97 @@
+---
+title: "randomForestExplainer"
+author: "Alicja Gosiewska"
+date: "27 07 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+
+```{r}
+library(DALEX)
+library(randomForestExplainer)
+library(randomForest)
+
+set.seed(123)
+```
+
+Fit a random forest to the titanic imputed data.
+
+```{r}
+rf_model <- randomForest(survived~., data = titanic_imputed, localImp = TRUE)
+```
+
+
+
+The generated raport with explanations form `randomForestExplainer` package is avialible at: TODO
+
+```{r, eval=FALSE}
+explain_forest(rf_model, interactions = TRUE, data = titanic_imputed)
+```
+
+
+# Model parts
+
+## Distribution of minimal depth and its min for each variable
+
+```{r}
+min_depth_frame <- min_depth_distribution(rf_model)
+plot_min_depth_distribution(min_depth_frame)
+```
+
+## Variable importance
+
+```{r}
+importance_frame <- measure_importance(rf_model)
+plot_multi_way_importance(importance_frame)
+```
+
+
+
+
+```{r}
+importance_frame <- measure_importance(rf_model)
+plot_importance_ggpairs(importance_frame)
+```
+
+
+
+
+
+
+```{r}
+importance_frame <- measure_importance(rf_model)
+plot_importance_rankings(importance_frame)
+```
+
+
+
+
+## Variable interactions
+
+```{r}
+interactions_frame <- min_depth_interactions(rf_model, vars = colnames(titanic_imputed[ ,-8]))
+plot_min_depth_interactions(interactions_frame)                                 
+```
+
+
+# Model parts
+
+```{r}
+plot_predict_interaction(rf_model, titanic_imputed, "age", "fare")
+```
+
