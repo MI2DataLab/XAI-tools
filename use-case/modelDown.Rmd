@@ -33,6 +33,7 @@ Fit a random forest and logistic regression to the titanic imputed data.
 
 ```{r}
 rf_model <- randomForest(survived~., data = titanic_imputed)
+glm_model <- glm(survived~., data = titanic_imputed)
 ```
 
 
@@ -41,6 +42,18 @@ explainer_rf <- DALEX::explain(rf_model,
                         data = titanic_imputed[, -8], y = titanic_imputed[, 8], verbose = FALSE)
 modelDown(explainer_rf, output_folder = "modelDown")
 ```
+
+modelDown for models comparison.
+
+```{r}
+explainer_rf <- DALEX::explain(rf_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8], verbose = FALSE)
+explainer_glm <- DALEX::explain(glm_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8], verbose = FALSE)
+modelDown(explainer_rf, explainer_glm, output_folder = "modelDown_2_models")
+
+```
+
 
 The generated modelDown is avialible at: TODO
 

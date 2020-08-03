@@ -97,7 +97,7 @@
       <img class="plot" src="img/variable_importance.png" />
       <br />
       <help-panel help-url="https://pbiecek.github.io/ema/featureImportance.html" docs-url="https://modeloriented.github.io/DALEX/reference/variable_importance.html"></help-panel>
-      <div class="archivist-code"><p>Get this object: <code>archivist::loadFromLocalRepo(md5hash = &quot;18956a71e0234af305e9736b03983f18&quot;, repoDir = &quot;modelDown/repository&quot;)</code></p></div>
+      <div class="archivist-code"><p>Get this object: <code>archivist::loadFromLocalRepo(md5hash = &quot;0b7b049be69275f00c9641a40c2961a1&quot;, repoDir = &quot;modelDown_2_models/repository&quot;)</code></p></div>
     </div>
     <div class="data-container">
       <br>
@@ -112,39 +112,76 @@
   <tr grouplength="9"><td colspan="2" style="border-bottom: 1px solid;"><strong>randomForest</strong></td></tr>
 <tr>
    <td style="text-align:left; padding-left: 2em;" indentlevel="1"> _full_model_ </td>
-   <td style="text-align:right;"> 110.3533 </td>
+   <td style="text-align:right;"> 108.3425 </td>
   </tr>
   <tr>
    <td style="text-align:left; padding-left: 2em;" indentlevel="1"> parch </td>
-   <td style="text-align:right;"> 118.3701 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left; padding-left: 2em;" indentlevel="1"> embarked </td>
-   <td style="text-align:right;"> 119.1738 </td>
+   <td style="text-align:right;"> 116.3846 </td>
   </tr>
   <tr>
    <td style="text-align:left; padding-left: 2em;" indentlevel="1"> sibsp </td>
-   <td style="text-align:right;"> 119.4723 </td>
+   <td style="text-align:right;"> 117.3030 </td>
   </tr>
   <tr>
-   <td style="text-align:left; padding-left: 2em;" indentlevel="1"> fare </td>
-   <td style="text-align:right;"> 141.3317 </td>
+   <td style="text-align:left; padding-left: 2em;" indentlevel="1"> embarked </td>
+   <td style="text-align:right;"> 118.3275 </td>
   </tr>
   <tr>
    <td style="text-align:left; padding-left: 2em;" indentlevel="1"> age </td>
-   <td style="text-align:right;"> 141.8674 </td>
+   <td style="text-align:right;"> 140.0681 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left; padding-left: 2em;" indentlevel="1"> fare </td>
+   <td style="text-align:right;"> 140.0811 </td>
   </tr>
   <tr>
    <td style="text-align:left; padding-left: 2em;" indentlevel="1"> class </td>
-   <td style="text-align:right;"> 158.8480 </td>
+   <td style="text-align:right;"> 157.9115 </td>
   </tr>
   <tr>
    <td style="text-align:left; padding-left: 2em;" indentlevel="1"> gender </td>
-   <td style="text-align:right;"> 212.5283 </td>
+   <td style="text-align:right;"> 218.6186 </td>
   </tr>
   <tr>
    <td style="text-align:left; padding-left: 2em;" indentlevel="1"> _baseline_ </td>
-   <td style="text-align:right;"> 296.5544 </td>
+   <td style="text-align:right;"> 298.3450 </td>
+  </tr>
+  <tr grouplength="9"><td colspan="2" style="border-bottom: 1px solid;"><strong>lm</strong></td></tr>
+<tr>
+   <td style="text-align:left; padding-left: 2em;" indentlevel="1"> _full_model_ </td>
+   <td style="text-align:right;"> 149.9827 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left; padding-left: 2em;" indentlevel="1"> parch </td>
+   <td style="text-align:right;"> 149.9784 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left; padding-left: 2em;" indentlevel="1"> fare </td>
+   <td style="text-align:right;"> 150.0518 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left; padding-left: 2em;" indentlevel="1"> embarked </td>
+   <td style="text-align:right;"> 151.8760 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left; padding-left: 2em;" indentlevel="1"> sibsp </td>
+   <td style="text-align:right;"> 153.5638 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left; padding-left: 2em;" indentlevel="1"> age </td>
+   <td style="text-align:right;"> 158.0017 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left; padding-left: 2em;" indentlevel="1"> class </td>
+   <td style="text-align:right;"> 191.0467 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left; padding-left: 2em;" indentlevel="1"> gender </td>
+   <td style="text-align:right;"> 239.2761 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left; padding-left: 2em;" indentlevel="1"> _baseline_ </td>
+   <td style="text-align:right;"> 285.2576 </td>
   </tr>
 </tbody>
 </table>
@@ -156,7 +193,7 @@
   <footer>
     <div class="footer">
       <div class="text-center">Site built with <a href="https://github.com/MI2DataLab/modelDown">modelDown</a>.</div>
-      <div class="text-center" style="margin: 0px 0px 5px;">Last updated: 2020-08-03 13:34:10 (session_info: <a href="session_info/session_info.txt">.txt</a>, <a href="session_info/session_info.rda">.rda</a>)</div>
+      <div class="text-center" style="margin: 0px 0px 5px;">Last updated: 2020-08-03 13:34:40 (session_info: <a href="session_info/session_info.txt">.txt</a>, <a href="session_info/session_info.rda">.rda</a>)</div>
     </div>
   </footer>
 

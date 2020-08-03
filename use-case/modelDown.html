@@ -1533,10 +1533,21 @@ library(randomForest)
 
 set.seed(123)</code></pre>
 <p>Fit a random forest and logistic regression to the titanic imputed data.</p>
-<pre class="r"><code>rf_model &lt;- randomForest(survived~., data = titanic_imputed)</code></pre>
+<pre class="r"><code>rf_model &lt;- randomForest(survived~., data = titanic_imputed)
+glm_model &lt;- glm(survived~., data = titanic_imputed)</code></pre>
 <pre class="r"><code>explainer_rf &lt;- DALEX::explain(rf_model,
                         data = titanic_imputed[, -8], y = titanic_imputed[, 8], verbose = FALSE)
 modelDown(explainer_rf, output_folder = &quot;modelDown&quot;)</code></pre>
+<pre><code>## [1] &quot;Generating auditor...&quot;
+## [1] &quot;Generating model_performance...&quot;</code></pre>
+<pre><code>## [1] &quot;Generating variable_importance...&quot;</code></pre>
+<pre><code>## [1] &quot;Generating variable_response...&quot;</code></pre>
+<p>modelDown for models comparison.</p>
+<pre class="r"><code>explainer_rf &lt;- DALEX::explain(rf_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8], verbose = FALSE)
+explainer_glm &lt;- DALEX::explain(glm_model,
+                        data = titanic_imputed[, -8], y = titanic_imputed[, 8], verbose = FALSE)
+modelDown(explainer_rf, explainer_glm, output_folder = &quot;modelDown_2_models&quot;)</code></pre>
 <pre><code>## [1] &quot;Generating auditor...&quot;
 ## [1] &quot;Generating model_performance...&quot;</code></pre>
 <pre><code>## [1] &quot;Generating variable_importance...&quot;</code></pre>
