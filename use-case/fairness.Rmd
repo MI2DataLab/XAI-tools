@@ -1,0 +1,71 @@
+---
+title: "fairness"
+author: "Szymon Maksymiuk"
+date: "03 08 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+```{r}
+library(fairness)
+```
+
+
+Fit a forest type model to the titanic imputed data.
+
+```{r}
+ranger_model <- ranger::ranger(survived~., data = titanic_imputed, classification = TRUE, probability = TRUE)
+```
+
+# Model Diagnostics
+
+## Equalized odds
+
+
+```{r}
+proba <- predict(ranger_model, titanic_imputed)$predictions[,2]
+data <- titanic_imputed
+data$proba <- proba
+
+(eqal_odds_result <- equal_odds(data    = data, 
+                               outcome = 'survived', 
+                               group   = 'class',
+                               probs   = 'proba', 
+                               preds_levels = c('0','1'), 
+                               cutoff = 0.5, 
+                               base   = '2nd'))
+```
+
+## Matthews correlation coefficient comparison
+
+```{r}
+proba <- predict(ranger_model, titanic_imputed)$predictions[,2]
+data <- titanic_imputed
+data$proba <- proba
+
+(mcc_parity <- mcc_parity(data    = data, 
+                          outcome = 'survived', 
+                          group   = 'gender',
+                          probs   = 'proba', 
+                          preds_levels = c('0','1'), 
+                          cutoff = 0.5, 
+                          base   = 'male'))
+```
+
+
