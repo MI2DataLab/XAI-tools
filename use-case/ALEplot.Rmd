@@ -46,6 +46,16 @@ pred_fun <- function(X.model, newdata) {
 }
 
 ALEPlot_1 <- ALEPlot(X = X, X.model = ranger_model, J = c(5), pred.fun = pred_fun)
+```
+
+
+```{r}
+X <- titanic_imputed[which(names(titanic_imputed) != "survived")]
+
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+
 ALEPlot_2 <- ALEPlot(X = X, X.model = ranger_model, J = c(1), pred.fun = pred_fun)
 ```
 
