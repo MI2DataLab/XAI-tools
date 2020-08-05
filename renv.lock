@@ -65,6 +65,13 @@
       "Repository": "CRAN",
       "Hash": "1016ef46c7ebf841513624ecb22eebc7"
     },
+    "ICEbox": {
+      "Package": "ICEbox",
+      "Version": "1.1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "71e46fa08c358084ce582e9eee6c454c"
+    },
     "KernSmooth": {
       "Package": "KernSmooth",
       "Version": "2.23-17",
@@ -1462,6 +1469,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "308013098befe37484df72c39cf90d6e"
+    },
+    "sfsmisc": {
+      "Package": "sfsmisc",
+      "Version": "1.1-7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "f87d32ed7d2e19cd0ffbdad97fce9345"
     },
     "shape": {
       "Package": "shape",

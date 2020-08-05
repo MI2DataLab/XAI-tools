@@ -1,0 +1,75 @@
+---
+title: "ICEbox"
+author: "Szymon Maksymiuk"
+date: "05 08 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+```{r}
+library(ICEbox)
+```
+
+
+Fit a forest type model to the titanic imputed data.
+
+```{r}
+ranger_model <- ranger::ranger(survived~., data = titanic_imputed, classification = TRUE, probability = TRUE)
+```
+
+# Model Profile
+
+## PDP with ICE curves
+
+
+```{r}
+custom_predict <- function(object, newdata) {
+  predict(object, newdata)$predictions[,1]
+}
+
+ice <- ice(object = ranger_model, X = titanic_imputed, predictor = "fare", logodds = TRUE, predictfcn = custom_predict)
+
+plot(ice)
+```
+
+## Partial derivative function
+
+
+```{r}
+custom_predict <- function(object, newdata) {
+  predict(object, newdata)$predictions[,1]
+}
+
+ice <- ice(object = ranger_model, X = titanic_imputed, predictor = "fare", logodds = TRUE, predictfcn = custom_predict)
+dice <- dice(ice)
+plot(dice)
+```
+
+## Clustered ICE
+
+```{r}
+custom_predict <- function(object, newdata) {
+  predict(object, newdata)$predictions[,1]
+}
+
+ice <- ice(object = ranger_model, X = titanic_imputed, predictor = "fare", logodds = TRUE, predictfcn = custom_predict)
+clust <- clusterICE(ice, 8)
+```
+
+
