@@ -1,0 +1,67 @@
+---
+title: "shapper"
+author: "Alicja Gosiewska"
+date: "05 08 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+
+```{r}
+library(DALEX)
+library(shapper)
+library(randomForest)
+
+set.seed(123)
+```
+
+Fit a random forest and logistic regression to the titanic imputed data.
+
+```{r}
+rf_model <- randomForest(survived~., data = titanic_imputed)
+glm_model <- glm(survived~., data = titanic_imputed)
+```
+
+
+
+# Predict Parts
+
+## SHAP 
+
+
+```{r}
+ive_rf <- individual_variable_effect(rf_model, data = titanic_imputed[,-8],
+                                     new_observation = titanic_imputed[1, -8],
+                                     nsamples = 50)
+
+plot(ive_rf)
+```
+
+Multiple models on one plot
+
+
+```{r}
+ive_rf <- individual_variable_effect(rf_model, data = titanic_imputed[,-8],
+                                     new_observation = titanic_imputed[1, -8],
+                                     nsamples = 50)
+ive_glm <- individual_variable_effect(glm_model, data = titanic_imputed[,-8],
+                                     new_observation = titanic_imputed[1, -8],
+                                     nsamples = 50)
+
+plot(ive_rf, ive_glm)
+```
+

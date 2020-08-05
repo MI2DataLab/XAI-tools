@@ -1536,7 +1536,7 @@ set.seed(123)</code></pre>
 <pre class="r"><code>rf_model &lt;- randomForest(survived~., data = titanic_imputed)</code></pre>
 <pre class="r"><code>explainer_rf &lt;- DALEX::explain(rf_model,
                         data = titanic_imputed[, -8], y = titanic_imputed[, 8], verbose = FALSE)
-ms &lt;- modelStudio(explainer_rf)
+ms &lt;- modelStudio(explainer_rf, B = 50)
 r2d3::save_d3_html(ms, file = &quot;./modelStudio_titanic.html&quot;)</code></pre>
 <p>The generated modelStudio is avialible at: TODO</p>
 <p>ModelStudio provides various explanation methods listed below as headers.</p>
@@ -1560,8 +1560,8 @@ r2d3::save_d3_html(ms, file = &quot;./modelStudio_titanic.html&quot;)</code></pr
 <div id="shap" class="section level2">
 <h2>SHAP</h2>
 </div>
-<div id="brek-down" class="section level2">
-<h2>Brek Down</h2>
+<div id="break-down" class="section level2">
+<h2>Break Down</h2>
 </div>
 </div>
 <div id="predict-profile" class="section level1">

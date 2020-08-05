@@ -39,7 +39,7 @@ rf_model <- randomForest(survived~., data = titanic_imputed)
 ```{r}
 explainer_rf <- DALEX::explain(rf_model,
                         data = titanic_imputed[, -8], y = titanic_imputed[, 8], verbose = FALSE)
-ms <- modelStudio(explainer_rf)
+ms <- modelStudio(explainer_rf, B = 50)
 r2d3::save_d3_html(ms, file = "./modelStudio_titanic.html")
 ```
 

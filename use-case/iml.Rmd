@@ -122,7 +122,7 @@ lime$results
 
 ```{r}
 predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
-shapley <- Shapley$new(predictor, x.interest = X[1, ])
+shapley <- Shapley$new(predictor, x.interest = X[1, ], sample.size = 50)
 plot(shapley)
 ```
 
