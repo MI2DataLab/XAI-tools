@@ -30,6 +30,7 @@ head(pbc_smaller)
 ```{r}
 library(survxai)
 library(rms)
+library(randomForestSRC)
 
 set.seed(123)
 ```
@@ -38,6 +39,7 @@ Fit a Cox PH model.
 
 ```{r}
 cph_model <- cph(Surv(years, status)~., data = pbc_smaller, surv = TRUE, x = TRUE, y=TRUE)
+rf_model <- rfsrc(Surv(years, status)~., data = pbc_smaller)
 ```
 
 
@@ -54,6 +56,24 @@ vr_cph_sex <- variable_response(surve_cph, "sex")
 plot(vr_cph_sex)
 
 ```
+
+Comparison of models
+
+```{r}
+surve_cph <- explain(model = cph_model,
+                     data = pbc_smaller[,-c(1,7)], 
+                     y = Surv(pbc_smaller$years, pbc_smaller$status))
+surve_rf <- explain(model = rf_model, 
+                     label = "random forest",
+                     data = pbc_smaller[,-c(1,7)], 
+                     y = Surv(pbc_smaller$years, pbc_smaller$status))
+vr_cph_sex <- variable_response(surve_cph, "sex")
+vr_rf_sex <- variable_response(surve_rf, "sex")
+
+plot(vr_cph_sex, vr_rf_sex)
+
+```
+
 
 # Model Diagnostics
 
@@ -92,4 +112,6 @@ surve_cph <- explain(model = cph_model,
 cp_cph <- ceteris_paribus(surve_cph, pbc_smaller[1,])
 plot(cp_cph)
 ```
+
+
 
