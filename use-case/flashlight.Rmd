@@ -1,0 +1,372 @@
+---
+title: "flashlight"
+author: "Szymon Maksymiuk"
+date: "05 08 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+```{r}
+library(flashlight)
+library(MetricsWeighted)
+```
+
+
+Fit a forest type model and decision tree to the titanic imputed data. 
+
+```{r}
+ranger_model <- ranger::ranger(survived~., data = titanic_imputed, classification = TRUE, probability = TRUE)
+tree_model <- rpart::rpart(as.factor(survived)~., data = titanic_imputed)
+```
+
+# Model Parts
+
+## Permutation feature importance - One model
+
+```{r}
+custom_predict <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,1]
+}
+fl <- flashlight(model = ranger_model, data = titanic_imputed, y = "survived", label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict)
+imp <- light_importance(fl, m_repetitions = 10)
+plot(imp, fill = "darkred")
+```
+
+## Permutation feature importance - Two models
+
+```{r}
+custom_predict_ranger <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,1]
+}
+
+custom_predict_rpart <- function(X.model, new_data) {
+  predict(X.model, new_data)[,1]
+}
+
+fl_ranger <- flashlight(model = ranger_model,  label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict_ranger)
+
+fl_rpart <- flashlight(model = tree_model,  label = "Titanic Tree",
+                 metrics = list(auc = AUC), predict_function = custom_predict_rpart)
+
+fl <- multiflashlight(list(fl_ranger, fl_rpart), data = titanic_imputed, y = "survived")
+
+imp <- light_importance(fl, m_repetitions = 10)
+plot(imp, fill = "darkred")
+```
+## Interactions - One model
+
+```{r}
+custom_predict <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,1]
+}
+fl <- flashlight(model = ranger_model, data = titanic_imputed, y = "survived", label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict)
+st_1 <- light_interaction(fl, seed = 123)
+plot(st_1, fill = "darkred")
+```
+
+## Interactions - TWo model
+
+```{r}
+custom_predict_ranger <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,1]
+}
+
+custom_predict_rpart <- function(X.model, new_data) {
+  predict(X.model, new_data)[,1]
+}
+
+fl_ranger <- flashlight(model = ranger_model,  label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict_ranger)
+
+fl_rpart <- flashlight(model = tree_model,  label = "Titanic Tree",
+                 metrics = list(auc = AUC), predict_function = custom_predict_rpart)
+
+fl <- multiflashlight(list(fl_ranger, fl_rpart), data = titanic_imputed, y = "survived")
+
+st_2 <- light_interaction(fl, seed = 123)
+plot(st_2, fill = "darkred")
+```
+
+
+## Pairwise Interactions - One model
+
+```{r}
+custom_predict <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,1]
+}
+fl <- flashlight(model = ranger_model, data = titanic_imputed, y = "survived", label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict)
+stp <- light_interaction(fl, seed = 123, v = most_important(st_1, 4), pairwise = TRUE)
+plot(stp, fill = "darkred")
+```
+
+## Interactions - TWo model
+
+```{r}
+custom_predict_ranger <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,1]
+}
+
+custom_predict_rpart <- function(X.model, new_data) {
+  predict(X.model, new_data)[,1]
+}
+
+fl_ranger <- flashlight(model = ranger_model,  label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict_ranger)
+
+fl_rpart <- flashlight(model = tree_model,  label = "Titanic Tree",
+                 metrics = list(auc = AUC), predict_function = custom_predict_rpart)
+
+fl <- multiflashlight(list(fl_ranger, fl_rpart), data = titanic_imputed, y = "survived")
+
+stp <- light_interaction(fl, seed = 123, v = most_important(st_2, 4), pairwise = TRUE)
+plot(stp, fill = "darkred")
+```
+
+
+# Model Profile
+
+## ALE Plot - One model
+
+
+```{r}
+custom_predict <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,1]
+}
+fl <- flashlight(model = ranger_model, data = titanic_imputed, y = "survived", label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict)
+
+ale <- light_profile(fl, v = "fare", type = "ale")
+plot(ale)
+```
+## ALE Plot - Two models
+
+
+```{r}
+custom_predict_ranger <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,1]
+}
+
+custom_predict_rpart <- function(X.model, new_data) {
+  predict(X.model, new_data)[,1]
+}
+
+fl_ranger <- flashlight(model = ranger_model,  label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict_ranger)
+
+fl_rpart <- flashlight(model = tree_model,  label = "Titanic Tree",
+                 metrics = list(auc = AUC), predict_function = custom_predict_rpart)
+
+fl <- multiflashlight(list(fl_ranger, fl_rpart), data = titanic_imputed, y = "survived")
+
+ale <- light_profile(fl, v = "fare", type = "ale")
+plot(ale)
+```
+
+## Partial Dependence Plot - One model
+
+```{r}
+custom_predict <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,2]
+}
+fl <- flashlight(model = ranger_model, data = titanic_imputed, y = "survived", label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict)
+
+pdp <- light_profile(fl, v = "fare", type = "partial dependence")
+plot(pdp)
+```
+
+## Partial Dependence Plot - Two models
+
+```{r}
+custom_predict_ranger <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,2]
+}
+
+custom_predict_rpart <- function(X.model, new_data) {
+  predict(X.model, new_data)[,1]
+}
+
+fl_ranger <- flashlight(model = ranger_model,  label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict_ranger)
+
+fl_rpart <- flashlight(model = tree_model,  label = "Titanic Tree",
+                 metrics = list(auc = AUC), predict_function = custom_predict_rpart)
+
+fl <- multiflashlight(list(fl_ranger, fl_rpart), data = titanic_imputed, y = "survived")
+
+pdp <- light_profile(fl, v = "fare", type = "partial dependence")
+plot(pdp)
+```
+## Predicted value profile - One model
+
+```{r}
+custom_predict <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,2]
+}
+fl <- flashlight(model = ranger_model, data = titanic_imputed, y = "survived", label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict)
+
+pvp <- light_profile(fl, v = "fare", type = "predicted")
+plot(pvp)
+```
+
+## Predicted value profile - Two models
+
+```{r}
+custom_predict_ranger <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,2]
+}
+
+custom_predict_rpart <- function(X.model, new_data) {
+  predict(X.model, new_data)[,2]
+}
+
+fl_ranger <- flashlight(model = ranger_model,  label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict_ranger)
+
+fl_rpart <- flashlight(model = tree_model,  label = "Titanic Tree",
+                 metrics = list(auc = AUC), predict_function = custom_predict_rpart)
+
+fl <- multiflashlight(list(fl_ranger, fl_rpart), data = titanic_imputed, y = "survived")
+
+pvp <- light_profile(fl, v = "fare", type = "predicted")
+plot(pvp)
+```
+
+## Response profile 
+
+```{r}
+custom_predict <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,2]
+}
+fl <- flashlight(model = ranger_model, data = titanic_imputed, y = "survived", label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict)
+
+pvp <- light_profile(fl, v = "fare", type = "response")
+plot(pvp)
+```
+
+## Residual profile - One model
+
+```{r}
+custom_predict <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,2]
+}
+fl <- flashlight(model = ranger_model, data = titanic_imputed, y = "survived", label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict)
+
+rvp <- light_profile(fl, v = "fare", type = "residual")
+plot(rvp)
+```
+
+## Residual profile - Two models
+
+```{r}
+custom_predict_ranger <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,2]
+}
+
+custom_predict_rpart <- function(X.model, new_data) {
+  predict(X.model, new_data)[,2]
+}
+
+fl_ranger <- flashlight(model = ranger_model,  label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict_ranger)
+
+fl_rpart <- flashlight(model = tree_model,  label = "Titanic Tree",
+                 metrics = list(auc = AUC), predict_function = custom_predict_rpart)
+
+fl <- multiflashlight(list(fl_ranger, fl_rpart), data = titanic_imputed, y = "survived")
+
+rvp <- light_profile(fl, v = "fare", type = "residual")
+plot(rvp)
+```
+
+## Global surrogate model
+
+```{r}
+custom_predict <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,2]
+}
+fl <- flashlight(model = ranger_model, data = titanic_imputed, y = "survived", label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict)
+
+surr <- light_global_surrogate(fl)
+plot(surr)
+
+```
+
+# Predict Parts
+
+## BreakDown
+
+```{r}
+custom_predict <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,2]
+}
+fl <- flashlight(model = ranger_model, data = titanic_imputed, y = "survived", label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict)
+
+bd <- light_breakdown(fl, new_obs = titanic_imputed[1, ], n_max = 1000)
+plot(bd)
+
+```
+
+# Predict Profile
+
+## ICE - One model
+
+```{r}
+custom_predict <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,2]
+}
+fl <- flashlight(model = ranger_model, data = titanic_imputed, y = "survived", label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict)
+
+cp <- light_ice(fl, v = "fare", seed = 123, n_max = 200)
+plot(cp)
+
+```
+
+## ICE - Two models
+
+```{r}
+custom_predict_ranger <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,2]
+}
+
+custom_predict_rpart <- function(X.model, new_data) {
+  predict(X.model, new_data)[,2]
+}
+
+fl_ranger <- flashlight(model = ranger_model,  label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict_ranger)
+
+fl_rpart <- flashlight(model = tree_model,  label = "Titanic Tree",
+                 metrics = list(auc = AUC), predict_function = custom_predict_rpart)
+
+fl <- multiflashlight(list(fl_ranger, fl_rpart), data = titanic_imputed, y = "survived")
+
+cp <- light_ice(fl, v = "fare", seed = 123, n_max = 200)
+plot(cp)
+```
