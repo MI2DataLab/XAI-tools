@@ -1,0 +1,95 @@
+---
+title: "survxai"
+author: "Alicja Gosiewska"
+date: "05 08 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Load `pbc` data set.
+
+```{r}
+data(pbc, package = "randomForestSRC")
+pbc <- pbc[complete.cases(pbc),]
+pbc$sex <- as.factor(pbc$sex)
+pbc$stage <- as.factor(pbc$stage)
+
+pbc_smaller <- pbc[,c("days", "status", "treatment", "sex", "age", "bili", "stage")]
+pbc_smaller$years <- pbc_smaller$days/356
+pbc_smaller <- pbc_smaller[,-1]
+head(pbc_smaller)
+```
+
+
+```{r}
+library(survxai)
+library(rms)
+
+set.seed(123)
+```
+
+Fit a Cox PH model.
+
+```{r}
+cph_model <- cph(Surv(years, status)~., data = pbc_smaller, surv = TRUE, x = TRUE, y=TRUE)
+```
+
+
+
+# Model profile
+
+## PDP
+
+```{r}
+surve_cph <- explain(model = cph_model,
+                     data = pbc_smaller[,-c(1,7)], 
+                     y = Surv(pbc_smaller$years, pbc_smaller$status))
+vr_cph_sex <- variable_response(surve_cph, "sex")
+plot(vr_cph_sex)
+
+```
+
+# Model Diagnostics
+
+## Prediction Error Curve for Brier Score
+
+```{r}
+surve_cph <- explain(model = cph_model,
+                     data = pbc_smaller[,-c(1,7)], 
+                     y = Surv(pbc_smaller$years, pbc_smaller$status))
+mp_cph <- model_performance(surve_cph)
+plot(mp_cph)
+```
+
+# Predit parts
+
+## Break Down
+
+```{r}
+surve_cph <- explain(model = cph_model,
+                     data = pbc_smaller[,-c(1,7)], 
+                     y = Surv(pbc_smaller$years, pbc_smaller$status))
+broken_prediction_cph <- prediction_breakdown(surve_cph, pbc_smaller[1,])
+plot(broken_prediction_cph)
+```
+
+
+# Predict profile
+
+## Ceteris paribus
+
+```{r}
+surve_cph <- explain(model = cph_model,
+                     data = pbc_smaller[,-c(1,7)], 
+                     y = Surv(pbc_smaller$years, pbc_smaller$status))
+
+cp_cph <- ceteris_paribus(surve_cph, pbc_smaller[1,])
+plot(cp_cph)
+```
+
