@@ -1,0 +1,124 @@
+---
+title: "auditor"
+author: "Szymon Maksymiuk"
+date: "06 08 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+```{r}
+library(auditor)
+library(randomForest)
+```
+
+
+Fit a forest type model to the titanic imputed data.
+
+```{r}
+rf_model <- randomForest::randomForest(as.factor(survived)~., data = titanic_imputed)
+gbm_model <- gbm::gbm(survived~., data = titanic_imputed, distribution = "bernoulli")
+```
+
+# Model Diagnostics
+
+## Half-normal plots
+
+
+```{r}
+exp <- DALEX::explain(rf_model, data = titanic_imputed, y = titanic_imputed$survived, verbose = FALSE)
+hf <- model_halfnormal(exp)
+plot_halfnormal(hf)
+```
+
+
+## LIFT curve - One model
+
+```{r}
+exp <- DALEX::explain(rf_model, data = titanic_imputed, y = titanic_imputed$survived, verbose = FALSE)
+eva_rf <- model_evaluation(exp)
+plot(eva_rf, type = "lift")
+```
+
+## LIFT curve - Two models
+
+```{r}
+exp_rf <- DALEX::explain(rf_model, data = titanic_imputed, y = titanic_imputed$survived, verbose = FALSE)
+exp_gbm <- DALEX::explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, verbose = FALSE)
+eva_rf <- model_evaluation(exp_rf)
+eva_gbm <- model_evaluation(exp_gbm)
+plot(eva_gbm, eva_rf, type = "lift")
+```
+
+## Observed vs Predicted - One model
+
+```{r}
+exp <- DALEX::explain(rf_model, data = titanic_imputed, y = titanic_imputed$survived, verbose = FALSE)
+res_rf <- model_residual(exp)
+plot(res_rf, type = "prediction")
+```
+
+## Observed vs Predicted - Two models
+
+```{r}
+exp_rf <- DALEX::explain(rf_model, data = titanic_imputed, y = titanic_imputed$survived, verbose = FALSE)
+exp_gbm <- DALEX::explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, verbose = FALSE)
+res_rf <- model_residual(exp_rf)
+res_gbm <- model_residual(exp_gbm)
+plot(res_gbm, res_rf, type = "prediction")
+```
+
+## Variable vs Predicted - One model
+
+```{r}
+exp <- DALEX::explain(rf_model, data = titanic_imputed, y = titanic_imputed$survived, verbose = FALSE)
+res_rf <- model_residual(exp)
+plot(res_rf, type = "prediction", variable = "fare")
+```
+
+## Variable vs Predicted - Two models
+
+```{r}
+exp_rf <- DALEX::explain(rf_model, data = titanic_imputed, y = titanic_imputed$survived, verbose = FALSE)
+exp_gbm <- DALEX::explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, verbose = FALSE)
+res_rf <- model_residual(exp_rf)
+res_gbm <- model_residual(exp_gbm)
+plot(res_gbm, res_rf, type = "prediction", variable = "fare")
+```
+
+## Density of residuals - One model
+
+```{r}
+exp <- DALEX::explain(rf_model, data = titanic_imputed, y = titanic_imputed$survived, verbose = FALSE)
+res_rf <- model_residual(exp)
+plot(res_rf, type = "residual_density")
+```
+
+## Correlation of models
+
+```{r}
+exp_rf <- DALEX::explain(rf_model, data = titanic_imputed, y = titanic_imputed$survived, verbose = FALSE)
+exp_gbm <- DALEX::explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, verbose = FALSE)
+res_rf <- model_residual(exp_rf)
+res_gbm <- model_residual(exp_gbm)
+plot(res_gbm, res_rf, type = "correlation")
+```
+
+
+
+
