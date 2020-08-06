@@ -1,0 +1,202 @@
+---
+title: "DALEX"
+author: "Szymon Maksymiuk"
+date: "06 08 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+
+```{r}
+library(DALEX)
+```
+
+Fit a random forest to the titanic imputed data.
+
+```{r}
+ranger_model <- ranger::ranger(survived~., data = titanic_imputed, classification = TRUE, probability = TRUE)
+gbm_model <- gbm::gbm(survived~., data = titanic_imputed, distribution = "bernoulli")
+```
+
+# Model parts
+
+## Variable importance
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model")
+
+fi_ranger <- model_parts(explainer_ranger)
+plot(fi_ranger)
+```
+
+
+# Model Profile
+
+## ALE Plot - One model
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+
+ale_ranger <- model_profile(explainer_ranger, variables = "fare", type = "accumulated")
+plot(ale_ranger)
+```
+
+## ALE Plot - Two models
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+explainer_gbm <- explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, label = "GBM Model", verbose = FALSE)
+
+ale_ranger <- model_profile(explainer_ranger, variables = "fare", type = "accumulated")
+ale_gbm <- model_profile(explainer_gbm, variables = "fare", type = "accumulated")
+plot(ale_ranger$agr_profiles, ale_gbm$agr_profiles)
+```
+
+## PDP Plot - One model
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+
+pdp_ranger <- model_profile(explainer_ranger, variables = "fare", type = "partial")
+plot(pdp_ranger)
+```
+
+## PDP Plot - Two models
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+explainer_gbm <- explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, label = "GBM Model", verbose = FALSE)
+
+pdp_ranger <- model_profile(explainer_ranger, variables = "fare", type = "partial")
+pdp_gbm <- model_profile(explainer_gbm, variables = "fare", type = "partial")
+plot(pdp_ranger$agr_profiles, pdp_gbm$agr_profiles)
+```
+
+
+# Model Diagnostics
+
+## Residual plots - One model
+
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+
+md_ranger <- model_diagnostics(explainer_ranger)
+plot(md_ranger)
+```
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+
+md_ranger <- model_diagnostics(explainer_ranger)
+plot(md_ranger, variable = "fare")
+```
+
+## Residual plots - Two models
+
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+explainer_gbm <- explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, label = "GBM Model", verbose = FALSE)
+
+md_ranger <- model_diagnostics(explainer_ranger)
+md_gbm <- model_diagnostics(explainer_gbm)
+plot(md_ranger, md_gbm)
+```
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+explainer_gbm <- explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, label = "GBM Model", verbose = FALSE)
+
+md_ranger <- model_diagnostics(explainer_ranger)
+md_gbm <- model_diagnostics(explainer_gbm)
+plot(md_ranger, md_gbm, variable = "fare")
+```
+
+# Predict Parts
+
+## BreakDown
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+
+bd_ranger <- predict_parts(explainer_ranger, new_observation = titanic_imputed[1,])
+plot(bd_ranger)
+```
+
+## Oscillations
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+
+osc_ranger <- predict_parts(explainer_ranger, new_observation = titanic_imputed[1,], type = "oscillations")
+plot(osc_ranger)
+```
+
+## shap
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+
+shap_ranger <- predict_parts(explainer_ranger, new_observation = titanic_imputed[1,], type = "shap")
+plot(shap_ranger)
+```
+
+# Predict Profile
+
+## Ceteris Paribus (ICE) - One model
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+
+cp_ranger <- predict_profile(explainer_ranger, new_observation = titanic_imputed[1,])
+plot(cp_ranger)
+```
+
+## Ceteris Paribus (ICE) - Two models
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+explainer_gbm <- explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, label = "GBM Model", verbose = FALSE)
+
+cp_ranger <- predict_profile(explainer_ranger, new_observation = titanic_imputed[1,])
+cp_gbm <- predict_profile(explainer_gbm, new_observation = titanic_imputed[1,])
+plot(cp_ranger, cp_gbm)
+```
+
+# Predict Diagnostics
+
+## Residual Diagnostics
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+
+rd_ranger <- predict_diagnostics(explainer_ranger, new_observation = titanic_imputed[1,], neighbors = 25)
+plot(rd_ranger)
+```
+## Stability plots
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+
+sp_ranger <- predict_diagnostics(explainer_ranger, new_observation = titanic_imputed[1,], neighbors = 25, variables = c("fare", "age"))
+plot(sp_ranger)
+```
+

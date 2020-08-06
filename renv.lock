@@ -807,10 +807,10 @@
     },
     "ingredients": {
       "Package": "ingredients",
-      "Version": "1.2.0",
+      "Version": "1.3.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "636aef5aea053d8b9e0d38038a16ea0a"
+      "Hash": "abb5168ef83e5427c32b4cc90ff54d77"
     },
     "ini": {
       "Package": "ini",
