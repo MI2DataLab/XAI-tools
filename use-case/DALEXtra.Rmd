@@ -1,0 +1,86 @@
+---
+title: "DALEXtra"
+author: "Szymon Maksymiuk"
+date: "05 08 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+Fit a forest type model and logistic regression to the titanic imputed data.
+
+```{r}
+ranger_model <- ranger::ranger(survived~., data = titanic_imputed, classification = TRUE, probability = TRUE)
+gbm_model <- gbm::gbm(survived~., data = titanic_imputed, distribution = "bernoulli")
+```
+
+
+```{r}
+library(DALEXtra)
+```
+# Model Diagnostics
+
+## Funnel Plot
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model")
+explainer_gbm <- explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, label = "GBM Model")
+
+fm <- funnel_measure(explainer_gbm, explainer_ranger, show_info = FALSE)
+plot(fm)
+```
+
+## Overall comaprison
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model", verbose = FALSE)
+explainer_gbm <- explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, label = "GBM Model", verbose = FALSE)
+
+oc <- overall_comparison(explainer_gbm, explainer_ranger, type = "classification")
+plot(oc)
+```
+
+
+## Training test comparison
+
+```{r}
+ind <- sample(1:nrow(titanic_imputed), 0.7*nrow(titanic_imputed))
+train <- titanic_imputed[ind,]
+test <- titanic_imputed[-ind,]
+
+ranger_model <- ranger::ranger(survived~., data = train, classification = TRUE, probability = TRUE)
+gbm_model <- gbm::gbm(survived~., data = train, distribution = "bernoulli")
+```
+
+
+```{r}
+explainer_ranger <- explain(ranger_model, data = test, y = test$survived, label = "Ranger Model", verbose = FALSE)
+explainer_gbm <- explain(gbm_model, data = test, y = test$survived, label = "GBM Model", verbose = FALSE)
+
+tt <- training_test_comparison(explainer_gbm, explainer_ranger, training_data = train, training_y = train$survived)
+plot(tt)
+```
+
+## Report
+
+Compiled report can be seen under this link: TBA
+
+```{r eval=FALSE}
+champion_challenger(list(fm, oc, tt), title = "DALEXtra: Champion - Challenger analysis", author = "Szymon Maksymiuk", model_performance_table = TRUE, output_name = "DALEXtra_champion_challenger")
+```
+
+
+

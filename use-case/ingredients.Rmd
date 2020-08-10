@@ -1,0 +1,172 @@
+---
+title: "ALEPlot"
+author: "Szymon Maksymiuk"
+date: "06 08 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+```{r}
+library(ingredients)
+```
+
+
+Fit a forest type model to the titanic imputed data.
+
+```{r}
+ranger_model <- ranger::ranger(survived~., data = titanic_imputed, classification = TRUE, probability = TRUE)
+gbm_model <- gbm::gbm(survived~., data = titanic_imputed, distribution = "bernoulli")
+```
+
+# Model Parts
+
+## Variable Importance
+
+
+```{r}
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+
+fi <- ingredients::feature_importance(ranger_model, titanic_imputed, y = titanic_imputed$survived, predict_function = pred_fun)
+plot(fi)
+
+```
+
+
+# Model Profile
+
+## ALE Plot - One model
+
+```{r}
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+
+ale_ranger <- accumulated_dependence(ranger_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun)
+plot(ale_ranger)
+```
+
+## ALE Plot - Two models
+
+```{r}
+pred_fun_ranger <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+
+pred_fun_gbm <- function(X.model, newdata) {
+  predict(X.model, newdata, type = "response")
+}
+
+ale_ranger <- accumulated_dependence(ranger_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun_ranger)
+ale_gbm <- accumulated_dependence(gbm_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun_gbm)
+plot(ale_ranger, ale_gbm)
+```
+
+
+## PDP Plot - One model
+
+```{r}
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+
+pdp_ranger <- partial_dependence(ranger_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun)
+plot(pdp_ranger)
+```
+
+## PDP Plot - Two models
+
+```{r}
+pred_fun_ranger <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+
+pred_fun_gbm <- function(X.model, newdata) {
+  predict(X.model, newdata, type = "response")
+}
+pdp_ranger <- partial_dependence(ranger_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun_ranger)
+pdp_gbm <- partial_dependence(gbm_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun_gbm)
+plot(pdp_ranger, pdp_gbm)
+```
+
+## CDP Plot - One model
+
+```{r}
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+
+cdp_ranger <- conditional_dependence(ranger_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun)
+plot(cdp_ranger)
+```
+
+## CDP Plot - Two models
+
+```{r}
+pred_fun_ranger <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+
+pred_fun_gbm <- function(X.model, newdata) {
+  predict(X.model, newdata, type = "response")
+}
+cdp_ranger <- conditional_dependence(ranger_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun_ranger)
+cdp_gbm <- conditional_dependence(gbm_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun_gbm)
+plot(cdp_ranger, cdp_gbm)
+```
+
+## Clustered Ceteris Paribus (ICE)
+
+```{r}
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+
+cp_ranger <- ceteris_paribus(ranger_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun_ranger, new_observation = titanic_imputed)
+cluster_cp <- cluster_profiles(cp_ranger, k = 8)
+plot(cluster_cp)
+```
+
+# Predict Parts
+
+## Oscillations
+
+```{r}
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+
+cp_ranger <- ceteris_paribus(ranger_model, data = titanic_imputed, predict_function = pred_fun_ranger, new_observation = titanic_imputed[1,])
+osc <- calculate_oscillations(cp_ranger)
+plot(osc)
+```
+
+# Predict Profile
+
+## Ceteris Paribus Profile (ICE)
+
+```{r}
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+
+cp_ranger <- ceteris_paribus(ranger_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun_ranger, new_observation = titanic_imputed[1,])
+plot(cp_ranger)
+```
