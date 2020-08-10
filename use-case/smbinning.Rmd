@@ -1,0 +1,100 @@
+---
+title: "smbinning"
+author: "Alicja Gosiewska"
+date: "10 08 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+
+head(titanic_imputed)
+```
+
+
+```{r}
+library(smbinning)
+
+set.seed(123)
+```
+
+Fit a random forest and logistic regression to the titanic imputed data.
+
+```{r}
+glm_model <- glm(survived~., data = titanic_imputed, family = "binomial")
+```
+
+# Model parts
+
+# Scaling coefficients of logistic regression
+
+```{r}
+# Generate binning object to generate variables
+gender <- smbinning.factor(titanic_imputed, x="gender",y="survived")
+age <- smbinning(titanic_imputed, x="age",y="survived")
+smclass <- smbinning.factor(titanic_imputed, x="class",y="survived")
+embarked <- smbinning.factor(titanic_imputed, x="embarked",y="survived")
+fare <- smbinning(titanic_imputed, x="fare",y="survived")
+sibsp <- smbinning(titanic_imputed, x="sibsp",y="survived")
+parch <- smbinning(titanic_imputed, x="parch",y="survived")
+
+pop <- titanic_imputed
+pop <- smbinning.factor.gen(pop, gender, "g1gender")
+pop <- smbinning.gen(pop, age, "g1age")
+pop <- smbinning.factor.gen(pop, smclass, "g1class")
+pop <- smbinning.factor.gen(pop, embarked, "g1embarked")
+pop <- smbinning.gen(pop, fare, "g1fare")
+# "No significant splits"
+# pop <- smbinning.gen(pop, sibsp, "g1sibsp") 
+pop <- smbinning.gen(pop, parch, "g1parch")
+
+glm_model <- glm(survived~g1gender+g1age+g1class+g1embarked+g1fare+g1parch, data = pop, family = "binomial")
+
+smbscaled=smbinning.scaling(glm_model)
+smbscaled$logitscaled # Scaled model
+```
+
+
+
+# Model diagnostics
+
+## ROC
+```{r}
+results = data.frame(pred = predict(glm_model, type = "response"),
+                     survived = titanic_imputed$survived)
+
+smbinning.metrics(dataset=results ,prediction="pred",actualclass="survived", report=0, plot="auc") # Plot AUC
+
+
+
+```
+
+## Cumulative distribution
+ 
+```{r}
+results <-  data.frame(pred = predict(glm_model, type = "response"),
+                     survived = titanic_imputed$survived)
+
+
+smbinning.metrics(dataset=results, prediction="pred", actualclass="survived", report=0, plot="ks") # Plot AUC
+```
+
+## Confucion matrix plot
+
+```{r}
+smbmetricsdf=smbinning.metrics(dataset=results, prediction="pred",
+                               actualclass="survived", returndf=1)
+
+
+smbinning.metrics.plot(df=smbmetricsdf,plot='cmactual')
+```
+
