@@ -38,12 +38,6 @@ rf_model <- randomForest(survived~., data = titanic_imputed)
 ```
 
 
-Use pdp's partial function for `fare` and `age` variables.
-
-```{r}
-rf_pdp <- partial(rf_model, pred.var = c("fare"), ice = TRUE)
-```
-
 
 # Model parts
 
@@ -62,12 +56,20 @@ topPredictors(rf_model, n = 3)
 ## PDP with ICE curves.
 
 ```{r}
+rf_pdp <- partial(rf_model, pred.var = c("fare"), ice = TRUE)
+plotPartial(rf_pdp)
+```
+
+PDP for two variables 
+```{r}
+rf_pdp <- partial(rf_model, pred.var = c("fare", "age"))
 plotPartial(rf_pdp)
 ```
 
 Use `autoplot` function to produce PDP with `ggplot2`.
 
 ```{r}
+rf_pdp <- partial(rf_model, pred.var = c("fare"), ice = TRUE)
 autoplot(rf_pdp)
 ```
 
