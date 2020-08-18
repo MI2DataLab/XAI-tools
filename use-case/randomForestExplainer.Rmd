@@ -36,10 +36,11 @@ rf_model <- randomForest(survived~., data = titanic_imputed, localImp = TRUE)
 ```
 
 
+# Generate
 
 The generated raport with explanations form `randomForestExplainer` package is avialible at: TODO
 
-```{r, eval=FALSE}
+```{r}
 explain_forest(rf_model, interactions = TRUE, data = titanic_imputed)
 ```
 
@@ -88,8 +89,6 @@ interactions_frame <- min_depth_interactions(rf_model, vars = colnames(titanic_i
 plot_min_depth_interactions(interactions_frame)                                 
 ```
 
-
-# Model parts
 
 ```{r}
 plot_predict_interaction(rf_model, titanic_imputed, "age", "fare")

@@ -1,3 +1,5 @@
+# Remember to restart R session before running
+
 library(pbapply)
 base::load("./benchmark/packages_chunks.rda")
 
