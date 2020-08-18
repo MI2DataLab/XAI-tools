@@ -37,6 +37,8 @@ glm_model <- glm(survived~., data = titanic_imputed)
 ```
 
 
+# Generate
+
 ```{r}
 explainer_rf <- DALEX::explain(rf_model,
                         data = titanic_imputed[, -8], y = titanic_imputed[, 8], verbose = FALSE)
@@ -45,7 +47,6 @@ modelDown(explainer_rf, output_folder = "modelDown")
 
 modelDown for models comparison.
 
-# Generate
 
 ```{r}
 explainer_rf <- DALEX::explain(rf_model,

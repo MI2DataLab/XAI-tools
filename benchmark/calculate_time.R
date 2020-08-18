@@ -12,11 +12,9 @@ eval_times_list <- pblapply(1L:nrow(packages_times),
                               try({
                                 local({
                                   eval(parse(text=packages_times[i, "pkg_setup"]))
-                                  start_time <- Sys.time()
-                                  eval(expr = parse(text=packages_times[i, "code_to_eval"]))
-                                  end_time <- Sys.time()
+                                  system.time(eval(expr = parse(text=packages_times[i, "code_to_eval"])))[3]
                                   
-                                  end_time - start_time
+                                  
                                   
     })
   }, silent = TRUE)

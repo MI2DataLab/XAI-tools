@@ -33,7 +33,7 @@ set.seed(123)
 Fit a random forest to the titanic imputed data.
 
 ```{r}
-rf_model <- randomForest(survived~., data = titanic_imputed)
+lda_model <- lda(survived~., data = titanic_imputed)
 ```
 
 
@@ -45,23 +45,21 @@ rf_model <- randomForest(survived~., data = titanic_imputed)
 
 
 ```{r}
-rf_lime <- lime(titanic_imputed, rf_model)
+lda_lime <- lime::lime(titanic_imputed, lda_model)
 predict_model.randomForest <- function(x, newdata, type = "prob"){
   as.data.frame(predict(x, newdata = newdata))
 }
-model_type.randomForest <- function(x, ...) 'classification'
-explanations <- lime::explain(titanic_imputed[1:4,], rf_lime, n_labels = 1, n_features = 5)
+explanations <- lime::explain(titanic_imputed[1:4,], lda_lime, n_labels = 1, n_features = 5)
 
 plot_features(explanations)
 ```
 
 ```{r}
-rf_lime <- lime(titanic_imputed, rf_model)
+lda_lime <- lime::lime(titanic_imputed, lda_model)
 predict_model.randomForest <- function(x, newdata, type = "prob"){
   as.data.frame(predict(x, newdata = newdata))
 }
-model_type.randomForest <- function(x, ...) 'classification'
-explanations <- lime::explain(titanic_imputed[1:4,], rf_lime, n_labels = 1, n_features = 5)
+explanations <- lime::explain(titanic_imputed[1:4,], lda_lime, n_labels = 1, n_features = 5)
 
 plot_explanations(explanations)
 ```
