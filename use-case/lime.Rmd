@@ -50,7 +50,7 @@ predict_model.randomForest <- function(x, newdata, type = "prob"){
   as.data.frame(predict(x, newdata = newdata))
 }
 model_type.randomForest <- function(x, ...) 'classification'
-explanations <- explain(titanic_imputed[1:4,], rf_lime, n_labels = 1, n_features = 5)
+explanations <- lime::explain(titanic_imputed[1:4,], rf_lime, n_labels = 1, n_features = 5)
 
 plot_features(explanations)
 ```
@@ -61,7 +61,7 @@ predict_model.randomForest <- function(x, newdata, type = "prob"){
   as.data.frame(predict(x, newdata = newdata))
 }
 model_type.randomForest <- function(x, ...) 'classification'
-explanations <- explain(titanic_imputed[1:4,], rf_lime, n_labels = 1, n_features = 5)
+explanations <- lime::explain(titanic_imputed[1:4,], rf_lime, n_labels = 1, n_features = 5)
 
 plot_explanations(explanations)
 ```

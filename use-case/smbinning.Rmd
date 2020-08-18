@@ -69,7 +69,7 @@ smbscaled$logitscaled # Scaled model
 
 ## ROC
 ```{r}
-results = data.frame(pred = predict(glm_model, type = "response"),
+results <- data.frame(pred = predict(glm_model, type = "response"),
                      survived = titanic_imputed$survived)
 
 smbinning.metrics(dataset=results ,prediction="pred",actualclass="survived", report=0, plot="auc") # Plot AUC
@@ -91,7 +91,9 @@ smbinning.metrics(dataset=results, prediction="pred", actualclass="survived", re
 ## Confucion matrix plot
 
 ```{r}
-smbmetricsdf=smbinning.metrics(dataset=results, prediction="pred",
+results <-  data.frame(pred = predict(glm_model, type = "response"),
+                     survived = titanic_imputed$survived)
+smbmetricsdf <- smbinning.metrics(dataset=results, prediction="pred",
                                actualclass="survived", returndf=1)
 
 
