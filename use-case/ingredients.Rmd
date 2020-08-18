@@ -139,7 +139,7 @@ pred_fun <- function(X.model, newdata) {
   predict(X.model, newdata)$predictions[,2]
 }
 
-cp_ranger <- ceteris_paribus(ranger_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun_ranger, new_observation = titanic_imputed)
+cp_ranger <- ceteris_paribus(ranger_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun, new_observation = titanic_imputed)
 cluster_cp <- cluster_profiles(cp_ranger, k = 8)
 plot(cluster_cp)
 ```
@@ -153,7 +153,7 @@ pred_fun <- function(X.model, newdata) {
   predict(X.model, newdata)$predictions[,2]
 }
 
-cp_ranger <- ceteris_paribus(ranger_model, data = titanic_imputed, predict_function = pred_fun_ranger, new_observation = titanic_imputed[1,])
+cp_ranger <- ceteris_paribus(ranger_model, data = titanic_imputed, predict_function = pred_fun, new_observation = titanic_imputed[1,])
 osc <- calculate_oscillations(cp_ranger)
 plot(osc)
 ```
@@ -167,6 +167,6 @@ pred_fun <- function(X.model, newdata) {
   predict(X.model, newdata)$predictions[,2]
 }
 
-cp_ranger <- ceteris_paribus(ranger_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun_ranger, new_observation = titanic_imputed[1,])
+cp_ranger <- ceteris_paribus(ranger_model, data = titanic_imputed, variables = "fare", predict_function = pred_fun, new_observation = titanic_imputed[1,])
 plot(cp_ranger)
 ```

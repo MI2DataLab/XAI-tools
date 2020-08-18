@@ -46,21 +46,29 @@ printSummary(model1)
 
 ```
 ```{r}
+model1 <- mcreg(x,y,error.ratio=1,method.reg="Deming", method.ci="analytical",
+               mref.name = "serum.crea", mtest.name = "plasma.crea", na.rm=TRUE)
 plot(model1)
 ```
 
 
 ```{r}
+model1 <- mcreg(x,y,error.ratio=1,method.reg="Deming", method.ci="analytical",
+               mref.name = "serum.crea", mtest.name = "plasma.crea", na.rm=TRUE)
 plotBias(model1)
 
 ```
 
 
 ```{r}
+model1 <- mcreg(x,y,error.ratio=1,method.reg="Deming", method.ci="analytical",
+               mref.name = "serum.crea", mtest.name = "plasma.crea", na.rm=TRUE)
 plotResiduals(model1)
 ```
 
 ```{r}
+model1 <- mcreg(x,y,error.ratio=1,method.reg="Deming", method.ci="analytical",
+               mref.name = "serum.crea", mtest.name = "plasma.crea", na.rm=TRUE)
 plotDifference(model1)
 ```
 
@@ -68,6 +76,8 @@ plotDifference(model1)
 Comparison of models.
 
 ```{r}
+model1 <- mcreg(x,y,error.ratio=1,method.reg="Deming", method.ci="analytical",
+               mref.name = "serum.crea", mtest.name = "plasma.crea", na.rm=TRUE)
 model2 <- mcreg(x,y,error.ratio=1,method.reg="Deming",
                method.ci="bootstrap", method.bootstrap.ci = "BCa",
                mref.name = "serum.crea", mtest.name = "plasma.crea", na.rm=TRUE)
