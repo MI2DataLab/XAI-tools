@@ -1534,7 +1534,7 @@ set.seed(123)</code></pre>
 <pre class="r"><code>rf_model &lt;- randomForest(survived~., data = titanic_imputed, localImp = TRUE)</code></pre>
 <div id="generate" class="section level1">
 <h1>Generate</h1>
-<p>The generated raport with explanations form <code>randomForestExplainer</code> package is avialible at: <a href="https://mi2datalab.github.io/XAI-tools/Your_forest_explained.html">https://mi2datalab.github.io/XAI-tools/Your_forest_explained.html</a>.</p>
+<p>The generated raport with explanations form <code>randomForestExplainer</code> package is avialible at: <a href="https://mi2datalab.github.io/IML-tools/Your_forest_explained.html">https://mi2datalab.github.io/IML-tools/Your_forest_explained.html</a>.</p>
 <pre class="r"><code>explain_forest(rf_model, interactions = TRUE, data = titanic_imputed)</code></pre>
 </div>
 <div id="model-parts" class="section level1">

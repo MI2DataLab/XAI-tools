@@ -57,7 +57,7 @@ modelDown(explainer_rf, explainer_glm, output_folder = "modelDown_2_models")
 ```
 
 
-The generated modelDown reports are is avialible at: [https://mi2datalab.github.io/XAI-tools/modelDown/index.html](https://mi2datalab.github.io/XAI-tools/modelDown/index.html) and [https://mi2datalab.github.io/XAI-tools/modelDown_2_model/index.html](https://mi2datalab.github.io/XAI-tools/modelDown_2_model/index.html)
+The generated modelDown reports are is avialible at: [https://mi2datalab.github.io/IML-tools/modelDown/index.html](https://mi2datalab.github.io/IML-tools/modelDown/index.html) and [https://mi2datalab.github.io/IML-tools/modelDown_2_model/index.html](https://mi2datalab.github.io/IML-tools/modelDown_2_model/index.html)
 
 modelDown provides various explanation methods listed below as headers.
 

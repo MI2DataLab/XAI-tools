@@ -74,7 +74,7 @@ plot(tt)
 
 ## Report
 
-Compiled report can be seen under this link: [https://mi2datalab.github.io/XAI-tools/DALEXtra_champion_challenger.html](https://mi2datalab.github.io/XAI-tools/DALEXtra_champion_challenger.html).
+Compiled report can be seen under this link: [https://mi2datalab.github.io/IML-tools/DALEXtra_champion_challenger.html](https://mi2datalab.github.io/IML-tools/DALEXtra_champion_challenger.html).
 
 ```{r eval=FALSE}
 explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model")

@@ -1538,23 +1538,23 @@ gbm_model &lt;- gbm::gbm(survived~., data = titanic_imputed, distribution = &quo
 ##   -&gt; model label       :  Ranger Model 
 ##   -&gt; data              :  2207  rows  8  cols 
 ##   -&gt; target variable   :  2207  values 
-##   -&gt; predict function  :  yhat.ranger  will be used ( [33m default [39m )
+##   -&gt; predict function  :  yhat.ranger  will be used ( [33m default [39m )
 ##   -&gt; predicted values  :  numerical, min =  0.01264675 , mean =  0.321757 , max =  0.9876064  
-##   -&gt; model_info        :  package ranger , ver. 0.12.1 , task classification ( [33m default [39m ) 
-##   -&gt; residual function :  difference between y and yhat ( [33m default [39m )
+##   -&gt; model_info        :  package ranger , ver. 0.12.1 , task classification ( [33m default [39m ) 
+##   -&gt; residual function :  difference between y and yhat ( [33m default [39m )
 ##   -&gt; residuals         :  numerical, min =  -0.7860449 , mean =  0.0003998048 , max =  0.8916943  
-##  [32m A new explainer has been created! [39m</code></pre>
+##  [32m A new explainer has been created! [39m</code></pre>
 <pre class="r"><code>explainer_gbm &lt;- explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, label = &quot;GBM Model&quot;)</code></pre>
 <pre><code>## Preparation of a new explainer is initiated
 ##   -&gt; model label       :  GBM Model 
 ##   -&gt; data              :  2207  rows  8  cols 
 ##   -&gt; target variable   :  2207  values 
-##   -&gt; predict function  :  yhat.gbm  will be used ( [33m default [39m )
+##   -&gt; predict function  :  yhat.gbm  will be used ( [33m default [39m )
 ##   -&gt; predicted values  :  numerical, min =  0.03720121 , mean =  0.3217774 , max =  0.9651433  
-##   -&gt; model_info        :  package gbm , ver. 2.1.8 , task classification ( [33m default [39m ) 
-##   -&gt; residual function :  difference between y and yhat ( [33m default [39m )
+##   -&gt; model_info        :  package gbm , ver. 2.1.8 , task classification ( [33m default [39m ) 
+##   -&gt; residual function :  difference between y and yhat ( [33m default [39m )
 ##   -&gt; residuals         :  numerical, min =  -0.9651433 , mean =  0.0003793686 , max =  0.9531925  
-##  [32m A new explainer has been created! [39m</code></pre>
+##  [32m A new explainer has been created! [39m</code></pre>
 <pre class="r"><code>fm &lt;- funnel_measure(explainer_gbm, explainer_ranger, show_info = FALSE)
 plot(fm)</code></pre>
 <pre><code>## $`challanger_Ranger Model`</code></pre>
@@ -1591,7 +1591,7 @@ plot(tt)</code></pre>
 </div>
 <div id="report" class="section level2">
 <h2>Report</h2>
-<p>Compiled report can be seen under this link: <a href="https://mi2datalab.github.io/XAI-tools/DALEXtra_champion_challenger.html">https://mi2datalab.github.io/XAI-tools/DALEXtra_champion_challenger.html</a>.</p>
+<p>Compiled report can be seen under this link: <a href="https://mi2datalab.github.io/IML-tools/DALEXtra_champion_challenger.html">https://mi2datalab.github.io/IML-tools/DALEXtra_champion_challenger.html</a>.</p>
 <pre class="r"><code>explainer_ranger &lt;- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = &quot;Ranger Model&quot;)
 explainer_gbm &lt;- explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, label = &quot;GBM Model&quot;)
 

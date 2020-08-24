@@ -37,7 +37,7 @@ rf_model <- randomForest(survived~., data = titanic_imputed, localImp = TRUE)
 
 # Generate
 
-The generated raport with explanations form `randomForestExplainer` package is avialible at: [https://mi2datalab.github.io/XAI-tools/Your_forest_explained.html](https://mi2datalab.github.io/XAI-tools/Your_forest_explained.html).
+The generated raport with explanations form `randomForestExplainer` package is avialible at: [https://mi2datalab.github.io/IML-tools/Your_forest_explained.html](https://mi2datalab.github.io/IML-tools/Your_forest_explained.html).
 
 ```{r, eval = FALSE}
 explain_forest(rf_model, interactions = TRUE, data = titanic_imputed)
