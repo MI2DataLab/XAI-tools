@@ -9,7 +9,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Alicja Gosiewska" />
 
 
 <title>modelDown</title>
@@ -1510,8 +1509,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">modelDown</h1>
-<h4 class="author">Alicja Gosiewska</h4>
-<h4 class="date">29 07 2020</h4>
+<h4 class="date">24-08-2020</h4>
 
 </div>
 
@@ -1535,6 +1533,8 @@ set.seed(123)</code></pre>
 <p>Fit a random forest and logistic regression to the titanic imputed data.</p>
 <pre class="r"><code>rf_model &lt;- randomForest(survived~., data = titanic_imputed)
 glm_model &lt;- glm(survived~., data = titanic_imputed)</code></pre>
+<div id="generate" class="section level1">
+<h1>Generate</h1>
 <pre class="r"><code>explainer_rf &lt;- DALEX::explain(rf_model,
                         data = titanic_imputed[, -8], y = titanic_imputed[, 8], verbose = FALSE)
 modelDown(explainer_rf, output_folder = &quot;modelDown&quot;)</code></pre>
@@ -1552,8 +1552,9 @@ modelDown(explainer_rf, explainer_glm, output_folder = &quot;modelDown_2_models&
 ## [1] &quot;Generating model_performance...&quot;</code></pre>
 <pre><code>## [1] &quot;Generating variable_importance...&quot;</code></pre>
 <pre><code>## [1] &quot;Generating variable_response...&quot;</code></pre>
-<p>The generated modelDown is avialible at: TODO</p>
+<p>The generated modelDown reports are is avialible at: <a href="https://mi2datalab.github.io/XAI-tools/modelDown/index.html">https://mi2datalab.github.io/XAI-tools/modelDown/index.html</a> and <a href="https://mi2datalab.github.io/XAI-tools/modelDown_2_model/index.html">https://mi2datalab.github.io/XAI-tools/modelDown_2_model/index.html</a></p>
 <p>modelDown provides various explanation methods listed below as headers.</p>
+</div>
 <div id="model-parts" class="section level1">
 <h1>Model parts</h1>
 <div id="variable-importance" class="section level2">

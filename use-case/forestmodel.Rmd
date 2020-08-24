@@ -1,7 +1,6 @@
 ---
 title: "forestmodel"
-author: "Alicja Gosiewska"
-date: "27 07 2020"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     toc: true

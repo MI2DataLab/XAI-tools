@@ -1078,6 +1078,13 @@
       "Repository": "CRAN",
       "Hash": "d908914ae53b04d4c0c0fd72ecc35370"
     },
+    "lda": {
+      "Package": "lda",
+      "Version": "1.4.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e992a3eb9f064141e210b563583dc63a"
+    },
     "libcoin": {
       "Package": "libcoin",
       "Version": "1.0-5",

@@ -9,7 +9,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Alicja Gosiewska" />
 
 
 <title>smbinning</title>
@@ -1510,8 +1509,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">smbinning</h1>
-<h4 class="author">Alicja Gosiewska</h4>
-<h4 class="date">10 08 2020</h4>
+<h4 class="date">24-08-2020</h4>
 
 </div>
 
@@ -1612,7 +1610,7 @@ smbscaled$logitscaled # Scaled model</code></pre>
 <h1>Model diagnostics</h1>
 <div id="roc" class="section level2">
 <h2>ROC</h2>
-<pre class="r"><code>results = data.frame(pred = predict(glm_model, type = &quot;response&quot;),
+<pre class="r"><code>results &lt;- data.frame(pred = predict(glm_model, type = &quot;response&quot;),
                      survived = titanic_imputed$survived)
 
 smbinning.metrics(dataset=results ,prediction=&quot;pred&quot;,actualclass=&quot;survived&quot;, report=0, plot=&quot;auc&quot;) # Plot AUC</code></pre>
@@ -1629,7 +1627,9 @@ smbinning.metrics(dataset=results, prediction=&quot;pred&quot;, actualclass=&quo
 </div>
 <div id="confucion-matrix-plot" class="section level2">
 <h2>Confucion matrix plot</h2>
-<pre class="r"><code>smbmetricsdf=smbinning.metrics(dataset=results, prediction=&quot;pred&quot;,
+<pre class="r"><code>results &lt;-  data.frame(pred = predict(glm_model, type = &quot;response&quot;),
+                     survived = titanic_imputed$survived)
+smbmetricsdf &lt;- smbinning.metrics(dataset=results, prediction=&quot;pred&quot;,
                                actualclass=&quot;survived&quot;, returndf=1)</code></pre>
 <pre><code>## 
 ##   Overall Performance Metrics 

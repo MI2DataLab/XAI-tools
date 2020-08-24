@@ -1,7 +1,6 @@
 ---
 title: "modelStudio"
-author: "Alicja Gosiewska"
-date: "29 07 2020"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     toc: true
@@ -44,7 +43,7 @@ ms <- modelStudio(explainer_rf, B = 50)
 r2d3::save_d3_html(ms, file = "./modelStudio_titanic.html")
 ```
 
-The generated modelStudio is avialible at: TODO
+The generated modelStudio is avialible at: [https://mi2datalab.github.io/XAI-tools/modelStudio_titanic.html](https://mi2datalab.github.io/XAI-tools/modelStudio_titanic.html) 
 
 ModelStudio provides various explanation methods listed below as headers.
 

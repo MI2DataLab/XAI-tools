@@ -1,7 +1,6 @@
 ---
 title: "survxai"
-author: "Alicja Gosiewska"
-date: "05 08 2020"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     toc: true

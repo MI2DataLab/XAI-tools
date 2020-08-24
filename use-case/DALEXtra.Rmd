@@ -1,7 +1,6 @@
 ---
 title: "DALEXtra"
-author: "Szymon Maksymiuk"
-date: "05 08 2020"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     toc: true
@@ -75,7 +74,7 @@ plot(tt)
 
 ## Report
 
-Compiled report can be seen under this link: TBA
+Compiled report can be seen under this link: [https://mi2datalab.github.io/XAI-tools/DALEXtra_champion_challenger.html](https://mi2datalab.github.io/XAI-tools/DALEXtra_champion_challenger.html).
 
 ```{r eval=FALSE}
 explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model")

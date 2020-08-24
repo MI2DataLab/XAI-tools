@@ -1,7 +1,6 @@
 ---
 title: "randomForestExplainer"
-author: "Alicja Gosiewska"
-date: "27 07 2020"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     toc: true
@@ -38,9 +37,9 @@ rf_model <- randomForest(survived~., data = titanic_imputed, localImp = TRUE)
 
 # Generate
 
-The generated raport with explanations form `randomForestExplainer` package is avialible at: TODO
+The generated raport with explanations form `randomForestExplainer` package is avialible at: [https://mi2datalab.github.io/XAI-tools/Your_forest_explained.html](https://mi2datalab.github.io/XAI-tools/Your_forest_explained.html).
 
-```{r}
+```{r, eval = FALSE}
 explain_forest(rf_model, interactions = TRUE, data = titanic_imputed)
 ```
 

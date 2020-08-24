@@ -1,7 +1,6 @@
 ---
 title: "lime"
-author: "Alicja Gosiewska"
-date: "27 07 2020"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     toc: true
@@ -26,6 +25,7 @@ head(titanic_imputed)
 ```{r}
 library(lime)
 library(randomForest)
+library(MASS)
 
 set.seed(123)
 ```

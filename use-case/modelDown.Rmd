@@ -1,7 +1,6 @@
 ---
 title: "modelDown"
-author: "Alicja Gosiewska"
-date: "29 07 2020"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     toc: true
@@ -58,7 +57,7 @@ modelDown(explainer_rf, explainer_glm, output_folder = "modelDown_2_models")
 ```
 
 
-The generated modelDown is avialible at: TODO
+The generated modelDown reports are is avialible at: [https://mi2datalab.github.io/XAI-tools/modelDown/index.html](https://mi2datalab.github.io/XAI-tools/modelDown/index.html) and [https://mi2datalab.github.io/XAI-tools/modelDown_2_model/index.html](https://mi2datalab.github.io/XAI-tools/modelDown_2_model/index.html)
 
 modelDown provides various explanation methods listed below as headers.
 
