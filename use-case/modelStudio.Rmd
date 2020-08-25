@@ -34,7 +34,7 @@ Fit a random forest and logistic regression to the titanic imputed data.
 rf_model <- randomForest(survived~., data = titanic_imputed)
 ```
 
-# Generate
+# Report
 
 ```{r}
 explainer_rf <- DALEX::explain(rf_model,

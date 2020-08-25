@@ -36,7 +36,7 @@ glm_model <- glm(survived~., data = titanic_imputed)
 ```
 
 
-# Generate
+# Report
 
 ```{r}
 explainer_rf <- DALEX::explain(rf_model,

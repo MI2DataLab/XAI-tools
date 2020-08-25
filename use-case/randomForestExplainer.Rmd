@@ -35,8 +35,7 @@ rf_model <- randomForest(survived~., data = titanic_imputed, localImp = TRUE)
 ```
 
 
-# Generate
-
+# Report
 The generated raport with explanations form `randomForestExplainer` package is avialible at: [https://mi2datalab.github.io/IML-tools/Your_forest_explained.html](https://mi2datalab.github.io/IML-tools/Your_forest_explained.html).
 
 ```{r, eval = FALSE}

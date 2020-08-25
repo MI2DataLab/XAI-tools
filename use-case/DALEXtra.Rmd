@@ -72,7 +72,7 @@ tt <- training_test_comparison(explainer_gbm, explainer_ranger, training_data = 
 plot(tt)
 ```
 
-## Report
+# Report
 
 Compiled report can be seen under this link: [https://mi2datalab.github.io/IML-tools/DALEXtra_champion_challenger.html](https://mi2datalab.github.io/IML-tools/DALEXtra_champion_challenger.html).
 

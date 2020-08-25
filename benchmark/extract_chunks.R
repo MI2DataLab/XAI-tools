@@ -17,7 +17,7 @@ get_setup <- function(rmd_file){
   
   while(ith_row <= header_rows[1]){
     row_code = rmd_file[ith_row, 1]
-    if (grepl("```{r}", row_code, fixed = TRUE)){
+    if (grepl("```{r}", row_code, fixed = TRUE) | grepl("```{r, eval = FALSE}", row_code, fixed = TRUE)){
       ith_row <- ith_row + 1
       row_code = rmd_file[ith_row, 1]
       while((!grepl("```", row_code, fixed = TRUE)) & (ith_row <= header_rows[1])){
