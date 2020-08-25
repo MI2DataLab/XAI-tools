@@ -30,6 +30,7 @@ gbm_model <- gbm::gbm(survived~., data = titanic_imputed, distribution = "bernou
 ```{r}
 library(DALEXtra)
 ```
+
 # Model Diagnostics
 
 ## Funnel Plot
@@ -76,7 +77,7 @@ plot(tt)
 
 Compiled report can be seen under this link: [https://mi2datalab.github.io/IML-tools/DALEXtra_champion_challenger.html](https://mi2datalab.github.io/IML-tools/DALEXtra_champion_challenger.html).
 
-```{r eval=FALSE}
+```{r eval = FALSE}
 explainer_ranger <- explain(ranger_model, data = titanic_imputed, y = titanic_imputed$survived, label = "Ranger Model")
 explainer_gbm <- explain(gbm_model, data = titanic_imputed, y = titanic_imputed$survived, label = "GBM Model")
 

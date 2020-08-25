@@ -3,7 +3,7 @@ library(dplyr)
 
 # VALUES
 
-explanation_types <- c("Model parts", "Model profile", "Model diagnostics", "Predict parts", "Predict profile", "Predict diagnostics", "Generate")
+explanation_types <- c("Model parts", "Model profile", "Model diagnostics", "Predict parts", "Predict profile", "Predict diagnostics", "Report")
 
 dir <- "./use-case/"
 
@@ -11,13 +11,11 @@ dir <- "./use-case/"
 
 get_setup <- function(rmd_file){
   header_rows <- apply(rmd_file, 2, FUN = function(x)grep("^# ", x, ignore.case = TRUE))
-  
   ith_row <- 1
   code_to_eval <- ""
-  
   while(ith_row <= header_rows[1]){
     row_code = rmd_file[ith_row, 1]
-    if (grepl("```{r}", row_code, fixed = TRUE) | grepl("```{r, eval = FALSE}", row_code, fixed = TRUE)){
+    if (grepl("```\\{r", row_code, fixed = FALSE)){
       ith_row <- ith_row + 1
       row_code = rmd_file[ith_row, 1]
       while((!grepl("```", row_code, fixed = TRUE)) & (ith_row <= header_rows[1])){
@@ -49,13 +47,12 @@ get_chunks <- function(rmd_file, type = "Model parts", pkg_name = ""){
   if (is.na(next_row)) next_row <-nrow(rmd_file)
   
   pkg_setup <- get_setup(rmd_file)
-  
   ith_row <- type_row
   type_codes <- data.frame(pkg_name = character(), type = character(), code_to_eval = character(), pkg_setup = character())
   
   while(ith_row <= next_row){
     row_code = rmd_file[ith_row, 1]
-    if (grepl("```{r}", row_code, fixed = TRUE)){
+    if (grepl("```\\{r", row_code, fixed = FALSE)){
       ith_row <- ith_row + 1
       row_code = rmd_file[ith_row, 1]
       code_to_eval <- ""

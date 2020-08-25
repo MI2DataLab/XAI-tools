@@ -21,4 +21,5 @@ packages_times %>%
   pivot_wider(names_from = type, values_from = evaluation_time)  %>%
   mutate_all(~replace(., is.na(.), "-")) %>%
   bind_cols(summary_time[, c("sum", "n")]) %>%
-  xtable()
+  xtable() %>%
+  print(include.rownames=FALSE)
