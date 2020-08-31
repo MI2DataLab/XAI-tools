@@ -30,7 +30,7 @@ library(MASS)
 set.seed(123)
 ```
 
-Fit a random forest to the titanic imputed data.
+Fit LDA to the titanic imputed data.
 
 ```{r}
 lda_model <- lda(survived~., data = titanic_imputed)

@@ -31,7 +31,7 @@ set.seed(123)
 Fit a random forest and logistic regression to the titanic imputed data.
 
 ```{r}
-rf_model <- randomForest(survived~., data = titanic_imputed)
+rf_model <- ranger::ranger(survived~., data = titanic_imputed, classification = TRUE, probability = TRUE)
 glm_model <- glm(survived~., data = titanic_imputed)
 ```
 
@@ -43,7 +43,12 @@ glm_model <- glm(survived~., data = titanic_imputed)
 
 
 ```{r}
-ive_rf <- individual_variable_effect(rf_model, data = titanic_imputed[,-8],
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+ive_rf <- individual_variable_effect(rf_model, 
+                                     predict_function = pred_fun,
+                                     data = titanic_imputed[,-8],
                                      new_observation = titanic_imputed[1, -8],
                                      nsamples = 50)
 
@@ -54,7 +59,11 @@ Multiple models on one plot
 
 
 ```{r}
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
 ive_rf <- individual_variable_effect(rf_model, data = titanic_imputed[,-8],
+                                     predict_function = pred_fun,
                                      new_observation = titanic_imputed[1, -8],
                                      nsamples = 50)
 ive_glm <- individual_variable_effect(glm_model, data = titanic_imputed[,-8],

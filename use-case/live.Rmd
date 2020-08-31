@@ -22,15 +22,14 @@ head(titanic_imputed)
 
 ```{r}
 library(live)
-library(randomForest)
 
 set.seed(123)
 ```
 
-Fit a random forest and logistic regression to the titanic imputed data.
+Fit a random forest to the titanic imputed data.
 
 ```{r}
-rf_model <- randomForest(survived~., data = titanic_imputed)
+rf_model <- ranger::ranger(survived~., data = titanic_imputed, classification = TRUE, probability = TRUE)
 ```
 
 
@@ -47,8 +46,13 @@ similar <- sample_locally(data = titanic_imputed,
                           explained_instance = titanic_imputed[1, ],
                           explained_var = "survived",
                           size = 500)
+
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
 similar1 <- add_predictions(to_explain = similar,
-                            black_box_model = rf_model)
+                            black_box_model = rf_model,
+                            predict_fun = pred_fun)
 explanation <- fit_explanation(live_object = similar1,
                              white_box = "regr.lm")
 plot(explanation, type = "forest")
@@ -62,8 +66,12 @@ similar <- sample_locally(data = titanic_imputed,
                           explained_instance = titanic_imputed[1, ],
                           explained_var = "survived",
                           size = 500)
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
 similar1 <- add_predictions(to_explain = similar,
-                            black_box_model = rf_model)
+                            black_box_model = rf_model,
+                            predict_fun = pred_fun)
 explanation <- fit_explanation(live_object = similar1,
                              white_box = "regr.lm")
 

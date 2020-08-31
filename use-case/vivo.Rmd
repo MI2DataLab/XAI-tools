@@ -23,7 +23,6 @@ head(titanic_imputed)
 ```{r}
 library(DALEX)
 library(vivo)
-library(randomForest)
 
 set.seed(123)
 ```
@@ -31,7 +30,7 @@ set.seed(123)
 Fit a random forest and logistic regression to the titanic imputed data.
 
 ```{r}
-rf_model <- randomForest(survived~., data = titanic_imputed)
+rf_model <- ranger::ranger(survived~., data = titanic_imputed, classification = TRUE, probability = TRUE)
 glm_model <- glm(survived~., data = titanic_imputed)
 ```
 

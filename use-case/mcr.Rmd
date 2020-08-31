@@ -11,7 +11,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
-Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+Load `creatine` data set.
 
 ```{r}
 data(creatinine,package="mcr")
@@ -25,7 +25,6 @@ head(data.frame(x, y))
 
 ```{r}
 library(mcr)
-library(randomForest)
 
 set.seed(123)
 ```

@@ -31,7 +31,7 @@ set.seed(123)
 Fit a random forest to the titanic imputed data.
 
 ```{r}
-rf_model <- randomForest(survived~., data = titanic_imputed, localImp = TRUE)
+rf_model <- randomForest(factor(survived)~., data = titanic_imputed, localImp = TRUE)
 ```
 
 

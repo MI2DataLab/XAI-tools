@@ -24,8 +24,8 @@ head(titanic_imputed)
 
 ```{r}
 library(pdp)
-library(randomForest)
 library(ggplot2)
+library(randomForest)
 
 set.seed(123)
 ```
@@ -33,7 +33,7 @@ set.seed(123)
 Fit a random forest to the titanic imputed data.
 
 ```{r}
-rf_model <- randomForest(survived~., data = titanic_imputed)
+rf_model <- randomForest(factor(survived)~., data = titanic_imputed)
 ```
 
 
@@ -55,20 +55,23 @@ topPredictors(rf_model, n = 3)
 ## PDP with ICE curves.
 
 ```{r}
-rf_pdp <- partial(rf_model, pred.var = c("fare"), ice = TRUE)
+pred_fun <- function(object, newdata) predict(object, newdata, type = "prob")[,2]
+rf_pdp <- partial(rf_model, pred.var = c("fare"), ice = TRUE, pred.fun = pred_fun )
 plotPartial(rf_pdp)
 ```
 
 PDP for two variables 
 ```{r}
-rf_pdp <- partial(rf_model, pred.var = c("fare", "age"))
+pred_fun <- function(object, newdata) predict(object, newdata, type = "prob")[,2]
+rf_pdp <- partial(rf_model, pred.var = c("fare", "age"), pred.fun = pred_fun)
 plotPartial(rf_pdp)
 ```
 
 Use `autoplot` function to produce PDP with `ggplot2`.
 
 ```{r}
-rf_pdp <- partial(rf_model, pred.var = c("fare"), ice = TRUE)
+pred_fun <- function(object, newdata) predict(object, newdata, type = "prob")[,2]
+rf_pdp <- partial(rf_model, pred.var = c("fare"), ice = TRUE, pred.fun = pred_fun)
 autoplot(rf_pdp)
 ```
 

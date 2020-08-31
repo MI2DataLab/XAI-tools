@@ -1509,7 +1509,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">modelDown</h1>
-<h4 class="date">24-08-2020</h4>
+<h4 class="date">31-08-2020</h4>
 
 </div>
 
@@ -1527,14 +1527,13 @@ head(titanic_imputed)</code></pre>
 ## 6   male  25   3rd Southampton  7.13     0     0        1</code></pre>
 <pre class="r"><code>library(DALEX)
 library(modelDown)
-library(randomForest)
 
 set.seed(123)</code></pre>
 <p>Fit a random forest and logistic regression to the titanic imputed data.</p>
-<pre class="r"><code>rf_model &lt;- randomForest(survived~., data = titanic_imputed)
+<pre class="r"><code>rf_model &lt;- ranger::ranger(survived~., data = titanic_imputed, classification = TRUE, probability = TRUE)
 glm_model &lt;- glm(survived~., data = titanic_imputed)</code></pre>
-<div id="generate" class="section level1">
-<h1>Generate</h1>
+<div id="report" class="section level1">
+<h1>Report</h1>
 <pre class="r"><code>explainer_rf &lt;- DALEX::explain(rf_model,
                         data = titanic_imputed[, -8], y = titanic_imputed[, 8], verbose = FALSE)
 modelDown(explainer_rf, output_folder = &quot;modelDown&quot;)</code></pre>

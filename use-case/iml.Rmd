@@ -34,7 +34,7 @@ set.seed(123)
 Fit a random forest to the titanic imputed data.
 
 ```{r}
-rf_model <- randomForest(survived~., data = titanic_imputed)
+rf_model <- ranger::ranger(survived~., data = titanic_imputed, classification = TRUE, probability = TRUE)
 ```
 
 ```{r}
@@ -46,8 +46,11 @@ X <- titanic_imputed[which(names(titanic_imputed) != "survived")]
 ## Variable importance
 
 ```{r}
-predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
-imp <- FeatureImp$new(predictor, loss = "mae")
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived, predict.function = pred_fun)
+imp <- FeatureImp$new(predictor, loss = "f1")
 plot(imp)
 imp$results
 ```
@@ -57,7 +60,10 @@ imp$results
 
 
 ```{r}
-predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived, predict.function = pred_fun)
 interact <- Interaction$new(predictor)
 plot(interact)
 ```
@@ -66,7 +72,10 @@ plot(interact)
 ## 2-way interaction measure
 
 ```{r}
-predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived, predict.function = pred_fun)
 interact <- Interaction$new(predictor, feature = "age")
 plot(interact)
 ```
@@ -77,7 +86,10 @@ plot(interact)
 ## PDP
 
 ```{r}
-predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived, predict.function = pred_fun)
 ale <- FeatureEffect$new(predictor, feature = "fare", method = "pdp")
 plot(ale)
 ```
@@ -85,7 +97,10 @@ plot(ale)
 ## ALE
 
 ```{r}
-predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived, predict.function = pred_fun)
 ale <- FeatureEffect$new(predictor, feature = "fare")
 plot(ale)
 ```
@@ -94,7 +109,10 @@ plot(ale)
 ## Surrogate for the whole model
 
 ```{r}
-predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived, predict.function = pred_fun)
 tree <- TreeSurrogate$new(predictor, maxdepth = 2)
 plot(tree)
 ```
@@ -107,7 +125,10 @@ plot(tree)
 
 
 ```{r}
-predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived, predict.function = pred_fun)
 lime <- LocalModel$new(predictor, x.interest = X[1, ])
 plot(lime)
 lime$results
@@ -120,7 +141,10 @@ lime$results
 
 
 ```{r}
-predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived)
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived, predict.function = pred_fun)
 shapley <- Shapley$new(predictor, x.interest = X[1, ], sample.size = 50)
 plot(shapley)
 ```

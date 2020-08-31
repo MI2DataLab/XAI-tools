@@ -1509,12 +1509,12 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">mcr</h1>
-<h4 class="date">24-08-2020</h4>
+<h4 class="date">31-08-2020</h4>
 
 </div>
 
 
-<p>Load <a href="https://modeloriented.github.io/DALEX/reference/titanic.html"><code>titanic_imputed</code></a> data set.</p>
+<p>Load <code>creatine</code> data set.</p>
 <pre class="r"><code>data(creatinine,package=&quot;mcr&quot;)
 x &lt;- creatinine$serum.crea
 y &lt;- creatinine$plasma.crea
@@ -1528,7 +1528,6 @@ head(data.frame(x, y))</code></pre>
 ## 5 1.72 1.88
 ## 6 3.23 3.35</code></pre>
 <pre class="r"><code>library(mcr)
-library(randomForest)
 
 set.seed(123)</code></pre>
 <div id="model-diagnostics" class="section level1">
