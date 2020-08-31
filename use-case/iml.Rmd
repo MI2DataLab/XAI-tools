@@ -149,3 +149,15 @@ shapley <- Shapley$new(predictor, x.interest = X[1, ], sample.size = 50)
 plot(shapley)
 ```
 
+# Predict profile
+
+## ICE curves
+
+```{r}
+pred_fun <- function(X.model, newdata) {
+  predict(X.model, newdata)$predictions[,2]
+}
+predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived, predict.function = pred_fun)
+ice <- FeatureEffect$new(predictor, feature = "fare", method = "ice")
+plot(ice)
+```
