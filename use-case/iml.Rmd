@@ -50,7 +50,7 @@ pred_fun <- function(X.model, newdata) {
   predict(X.model, newdata)$predictions[,2]
 }
 predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived, predict.function = pred_fun)
-imp <- FeatureImp$new(predictor, loss = "f1")
+imp <- FeatureImp$new(predictor, loss = "logLoss")
 plot(imp)
 imp$results
 ```
