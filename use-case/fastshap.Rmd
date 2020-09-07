@@ -98,7 +98,7 @@ pred_fun <- function(X.model, newdata) {
 
 shap <- explain(ranger_model, X = titanic_imputed, pred_wrapper = pred_fun, nsim = 50)
 
-force_plot(shap[1,], baseline = mean(pred_fun(ranger_model, titanic_imputed)), feature_values = titanic_imputed[1,])
+force_plot(shap[1,], baseline = mean(pred_fun(ranger_model, titanic_imputed)), feature_values = titanic_imputed[1,], display = "html")
 ```
 
 
