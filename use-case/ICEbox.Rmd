@@ -7,6 +7,16 @@ output:
     toc_float: true
 ---
   
+  
+This report aims to present the capabilities of the package `ICEBox`. 
+
+The document contains a use-case of on the [titanic_imputed](https://modeloriented.github.io/DALEX/reference/titanic.html) data set described in Section real-world use-case of the article.
+
+We did our best to show the entire range of the implemented explanations. Please note that the examples may be incomplete. If you think something is missing, feel free to make a pull request at the GitHub repository [MI2DataLab/IML-tools](https://github.com/MI2DataLab/IML-tools)
+
+The document is a part of the paper "Landscape of R packages for ExplainableMachine Learning", S. Maksymiuk, A. Gosiewska, and P. Biecek. 
+The list of use-cases for all packages included in the article is [here](https://mi2datalab.github.io/IML-tools/).  
+  
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
