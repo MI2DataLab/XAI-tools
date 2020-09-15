@@ -7,7 +7,7 @@ output:
     toc_float: true
 ---
   
-This report aims to present the capabilities of the package `naivebayes`  for Naive Bayes galss-box models.
+This report aims to present the capabilities of the package `naivebayes` in the field of Naive Bayes galss-box models.
 
 The document contains a use-case of on the [titanic_imputed](https://modeloriented.github.io/DALEX/reference/titanic.html) data set described in Section real-world use-case of the article.
 

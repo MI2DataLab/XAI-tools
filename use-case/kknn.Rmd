@@ -1,5 +1,5 @@
 ---
-title: "arules"
+title: "kknn"
 date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
@@ -7,7 +7,7 @@ output:
     toc_float: true
 ---
   
-This report aims to present the capabilities of the package `arules`  and `arulesCBA` in the field of rules based galss-box models.
+This report aims to present the capabilities of the package `kknn` in the field of k-Nearest Neighbor galss-box models.
 
 The document contains a use-case of on the [titanic_imputed](https://modeloriented.github.io/DALEX/reference/titanic.html) data set described in Section real-world use-case of the article.
 
@@ -32,50 +32,27 @@ head(titanic_imputed)
 ```
 
 ```{r}
-library("arulesCBA")
+library("kknn")
 ```
 
 
 Fit a rules type model to the titanic imputed data.
 
 ```{r}
-model <- bCBA(survived~., titanic_imputed)
+model <- kknn(survived~., titanic_imputed, titanic_imputed)
 ```
 
 
-# Rules visualization
-
-## ALE Plot
+# Matrix of indices of the K nearest neighbours 
 
 
 ```{r}
-library(arulesViz)
-
-rules <- model$rules
+model$C[1:15,]
 ```
 
+# Matrix of distances of the K nearest neighbours 
 
 ```{r}
-inspectDT(rules)
+# we round the values so they will print in a nice way
+round(model$D[1:15,], 6)
 ```
-
-```{r}
-plot(rules, method = "graph")
-```
-
-```{r}
-plot(rules)
-```
-
-```{r}
-plot(rules, method = "paracoord")
-```
-
-```{r}
-plot(rules, method = "two-key plot")
-```
-
-
-
-
-
