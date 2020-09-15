@@ -1,0 +1,53 @@
+---
+title: "naivebayes"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+  
+This report aims to present the capabilities of the package `naivebayes`  for Naive Bayes galss-box models.
+
+The document contains a use-case of on the [titanic_imputed](https://modeloriented.github.io/DALEX/reference/titanic.html) data set described in Section real-world use-case of the article.
+
+Please note that the examples may be incomplete. If you think something is missing, feel free to make a pull request at the GitHub repository [MI2DataLab/IML-tools](https://github.com/MI2DataLab/IML-tools)
+
+The document is a part of the paper "Landscape of R packages for Explainable Machine Learning", S. Maksymiuk, A. Gosiewska, and P. Biecek. 
+The list of use-cases for all packages included in the article is [here](https://mi2datalab.github.io/IML-tools/).  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+
+
+Load [`titanic_imputed`](https://modeloriented.github.io/DALEX/reference/titanic.html) data set.
+
+```{r}
+data(titanic_imputed, package = "DALEX")
+titanic_imputed$survived <- as.factor(titanic_imputed$survived)
+
+head(titanic_imputed)
+```
+
+```{r}
+library("naivebayes")
+```
+
+
+Fit a rules type model to the titanic imputed data.
+
+```{r}
+model <- naive_bayes(survived~., data = titanic_imputed)
+```
+
+
+# Model visualization
+
+
+```{r}
+plot(model)
+```
+
+
