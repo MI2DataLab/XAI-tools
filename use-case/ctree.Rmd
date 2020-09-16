@@ -1,5 +1,5 @@
 ---
-title: "arules"
+title: "party"
 date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
@@ -7,7 +7,7 @@ output:
     toc_float: true
 ---
   
-This report aims to present the capabilities of the package `arules`  and `arulesCBA` in the field of rules based galss-box models.
+This report aims to present the capabilities of the package `party` in the field of decision tree based galss-box models.
 
 The document contains a use-case of on the [titanic_imputed](https://modeloriented.github.io/DALEX/reference/titanic.html) data set described in Section real-world use-case of the article.
 
@@ -32,49 +32,23 @@ head(titanic_imputed)
 ```
 
 ```{r}
-library("arulesCBA")
+library("party")
 ```
 
 
 Fit a rules type model to the titanic imputed data.
 
 ```{r}
-model <- bCBA(survived~., titanic_imputed)
+model <- ctree(survived~., titanic_imputed)
 ```
 
 
-# Rules visualization
+# Tree visualization
 
 
 
-```{r}
-library(arulesViz)
-
-rules <- model$rules
+```{r, fig.width=18, fig.height=10}
+plot(model)
 ```
-
-
-```{r}
-inspectDT(rules)
-```
-
-```{r}
-plot(rules, method = "graph")
-```
-
-```{r}
-plot(rules)
-```
-
-```{r}
-plot(rules, method = "paracoord")
-```
-
-```{r}
-plot(rules, method = "two-key plot")
-```
-
-
-
 
 

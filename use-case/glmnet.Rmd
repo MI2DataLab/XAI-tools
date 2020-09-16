@@ -1,5 +1,5 @@
 ---
-title: "arules"
+title: "glmnet"
 date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
@@ -7,7 +7,7 @@ output:
     toc_float: true
 ---
   
-This report aims to present the capabilities of the package `arules`  and `arulesCBA` in the field of rules based galss-box models.
+This report aims to present the capabilities of the package `glmnet` in the field of generalized linear galss-box models.
 
 The document contains a use-case of on the [titanic_imputed](https://modeloriented.github.io/DALEX/reference/titanic.html) data set described in Section real-world use-case of the article.
 
@@ -32,49 +32,29 @@ head(titanic_imputed)
 ```
 
 ```{r}
-library("arulesCBA")
+library("glmnet")
 ```
 
 
 Fit a rules type model to the titanic imputed data.
 
 ```{r}
-model <- bCBA(survived~., titanic_imputed)
+library("Matrix")
+X <- sparse.model.matrix(survived ~ . - 1,  data = titanic_imputed)
+
+model <- glmnet(X, as.factor(titanic_imputed$survived), family = "binomial")
 ```
 
 
-# Rules visualization
-
+# Coefficients
 
 
 ```{r}
-library(arulesViz)
-
-rules <- model$rules
+coef(model, model$lambda[length(model$lambda)])
 ```
 
 
 ```{r}
-inspectDT(rules)
+plot(model)
 ```
-
-```{r}
-plot(rules, method = "graph")
-```
-
-```{r}
-plot(rules)
-```
-
-```{r}
-plot(rules, method = "paracoord")
-```
-
-```{r}
-plot(rules, method = "two-key plot")
-```
-
-
-
-
 
