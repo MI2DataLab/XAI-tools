@@ -1,8 +1,10 @@
 
+# Landscape of R packages for eXplainable Artificial Intelligence
+
 This repository is a landing page for the article: Szymon Maksymiuk,
 Alicja Gosiewska, and Przemysław Biecek. *Landscape of R packages for
 eXplainable Artificial Intelligence*. It contains data and code
-necessary to reproduce all analysis made in the papee.
+necessary to reproduce all analysis made in the paper.
 
 <center>
 
@@ -57,6 +59,8 @@ During the work under the article, we have created a markdown with an
 example of usage of every compared package. The results can be seen
 below. As teaser figures used in the article are presented.
 
+<center>
+
 <div class="figure">
 
 <img src="./figures/pdps.png" alt="Partial Dependence Porfiles for fare variable from the Titanic data set generated with DALEX(top-left), flashlight(right-top), iml(left-bottom), pdp(right-bottom).  We can see that the profiles differs. It is due to the fact that profiles are evaluated on different grids of points." width="1200" />
@@ -72,6 +76,10 @@ the fact that profiles are evaluated on different grids of points.
 
 </div>
 
+</center>
+
+<center>
+
 <div class="figure">
 
 <img src="./figures/shaps.png" alt="Contribution plots based on Shapley values for the same observation from Titanic dataset generated with DALEX (top-left), flashlight (right-top), iml (left-bottom), pdp (right-bottom)." width="1200" />
@@ -85,6 +93,8 @@ iml (left-bottom), pdp (right-bottom).
 </p>
 
 </div>
+
+</center>
 
 <a href="https://mi2datalab.github.io/XAI-tools/ALEplot.html">ALEplot</a>
 </br>
