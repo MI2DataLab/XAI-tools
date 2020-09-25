@@ -8,7 +8,7 @@ necessary to reproduce all analysis made in the paper.
 
 <center>
 
-<font size="6"> Link to the work: </font> </br>
+**<font size="6"> Link to the work: </font> </br>**
 <font size="6"><a href="https://mi2datalab.github.io/XAI-tools/ALEplot.html">TBA</a>
 </font>
 
