@@ -165,5 +165,5 @@ be restored with the `renv` package.
 
 We did our best to show the entire range of the implemented
 explanations. Please note that the examples may be incomplete. If you
-think something is missing, feel free to make a pull request in this
-repository.
+think something is missing, feel free to make a pull request in the
+[XAI-tools](https://github.com/MI2DataLab/XAI-tools) repository.
