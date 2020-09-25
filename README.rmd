@@ -1,8 +1,7 @@
 ---
+title: Landscape of R packages for eXplainable Artificial Intelligence
 output: github_document
 ---
-
-# Landscape of R packages for eXplainable Artificial Intelligence
 
 This repository is a landing page for  the article: [Szymon Maksymiuk](https://www.linkedin.com/in/szymon-maksymiuk/), [Alicja Gosiewska](https://www.linkedin.com/in/alicja-gosiewska/), and [Przemysław Biecek](https://www.linkedin.com/in/pbiecek/). *Landscape of R packages for eXplainable Artificial Intelligence*. It contains data and code necessary to reproduce all analysis made in the paper.
 

@@ -1,5 +1,5 @@
-
-# Landscape of R packages for eXplainable Artificial Intelligence
+Landscape of R packages for eXplainable Artificial Intelligence
+================
 
 This repository is a landing page for the article: [Szymon
 Maksymiuk](https://www.linkedin.com/in/szymon-maksymiuk/), [Alicja
