@@ -11,14 +11,26 @@ and code necessary to reproduce all analysis made in the paper.
 <center>
 
 **<font size="6"> Link to the work: </font> </br>**
-<font size="6"><a href="https://mi2datalab.github.io/XAI-tools/ALEplot.html">TBA</a>
+<font size="6"><a href="https://arxiv.org/abs/2009.13248">https://arxiv.org/abs/2009.13248</a>
 </font>
 
 </center>
 
 In order to cite our work please use the following BiBTeX entry
 
-    Here will be bibtex
+    @misc{xailandscape,
+          title={Landscape of R packages for eXplainable Artificial Intelligence}, 
+          author={Szymon Maksymiuk and Alicja Gosiewska and Przemyslaw Biecek},
+          year={2020},
+          journal={arXiv},
+          eprint={2009.13248},
+          archivePrefix={arXiv},
+          primaryClass={cs.LG},
+          URL={https://arxiv.org/abs/2009.13248}
+    }
+
+<a href="https://youtu.be/C7ac4A1t7sc?t=2763">Here</a> is the talk we’ve
+gave on **whyR? 2020** conference about our work.
 
 # Abstract
 
