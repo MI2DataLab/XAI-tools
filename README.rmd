@@ -5,28 +5,10 @@ output: github_document
 
 This repository is a landing page for  the article: [Szymon Maksymiuk](https://www.linkedin.com/in/szymon-maksymiuk/), [Alicja Gosiewska](https://www.linkedin.com/in/alicja-gosiewska/), and [Przemysław Biecek](https://www.linkedin.com/in/pbiecek/). *Landscape of R packages for eXplainable Artificial Intelligence*. It contains data and code necessary to reproduce all analysis made in the paper.
 
-<center>
- 
-**<font size="6"> Link to the work: </font> </br>**
-<font size="6"><a href="https://arxiv.org/abs/2009.13248">https://arxiv.org/abs/2009.13248</a> </font>
+# Video 
 
-</center>
+<a href="https://youtu.be/C7ac4A1t7sc?t=2763">Find a short introduction to this work in this talk presented at WhyR 2020. <img src="figures/youtube.png" width=140></a>.
 
-In order to cite our work please use the following BiBTeX entry
-
-```
-@misc{xailandscape,
-      title={Landscape of R packages for eXplainable Artificial Intelligence}, 
-      author={Szymon Maksymiuk and Alicja Gosiewska and Przemyslaw Biecek},
-      year={2020},
-      journal={arXiv},
-      eprint={2009.13248},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      URL={https://arxiv.org/abs/2009.13248}
-}
-```
-<a href="https://youtu.be/C7ac4A1t7sc?t=2763">Here</a> is the talk we've gave on **whyR? 2020** conference about our work.
 
 # Abstract 
 
@@ -100,3 +82,22 @@ Versions of all used packages are stored in the renv.lock file and can be restor
 
 We did our best to show the entire range of the implemented explanations. Please note that the examples may be incomplete. If you think something is missing, feel free to make a pull request in the [XAI-tools](https://github.com/MI2DataLab/XAI-tools) repository.
 
+
+# Preprint
+
+Preprint for this worj is avaliable at https://arxiv.org/abs/2009.13248 .
+
+In order to cite our work please use the following BiBTeX entry
+
+```
+@misc{xailandscape,
+      title={Landscape of R packages for eXplainable Artificial Intelligence}, 
+      author={Szymon Maksymiuk and Alicja Gosiewska and Przemyslaw Biecek},
+      year={2020},
+      journal={arXiv},
+      eprint={2009.13248},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      URL={https://arxiv.org/abs/2009.13248}
+}
+```
