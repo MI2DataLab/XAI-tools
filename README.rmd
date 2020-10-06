@@ -1,6 +1,6 @@
 ---
 title: Landscape of R packages for eXplainable Artificial Intelligence
-output: gtihub_document
+output: html_document
 ---
 
 This repository is a landing page for  the article: [Szymon Maksymiuk](https://www.linkedin.com/in/szymon-maksymiuk/), [Alicja Gosiewska](https://www.linkedin.com/in/alicja-gosiewska/), and [Przemysław Biecek](https://www.linkedin.com/in/pbiecek/). *Landscape of R packages for eXplainable Artificial Intelligence*. It contains data and code necessary to reproduce all analysis made in the paper.
@@ -32,40 +32,22 @@ During the work under the article, we have created a markdown with an example of
 
 
 <center><font size="+2">
- <a href="https://mi2datalab.github.io/XAI-tools/ALEplot.html">ALEplot</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/arules.html">arules</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/auditor.html">auditor</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/ctree.html">ctree</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/DALEX.html">DALEX</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/DALEXtra.html">DALEXtra</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/EIX.html">EIX</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/ExplainPrediction.html">ExplainPrediction</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/fairness.html">fairness</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/fastshap.html">fastshap</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/flashlight.html">flashlight</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/forestmodel.html">forestmodel</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/fscaret.html">fscaret</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/glmnet.html">glmnet</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/iBreakDown.html">iBreakDown</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/ICEbox.html">ICEbox</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/iml.html">iml</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/ingredients.html">ingredients</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/kknn.html">kknn</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/naivebayes.html">naivebayes</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/lime.html">lime</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/live.html">live</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/mcr.html">mcr</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/modelDown.html">modelDown</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/modelStudio.html">modelStudio</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/pdp.html">pdp</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/randomForestExplainer.html">randomForestExplainer</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/shapper.html">shapper</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/smbinning.html">smbinning</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/survxai.html">survxai</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/vip.html">vip</a> </br> 
- <a href="https://mi2datalab.github.io/XAI-tools/vivo.html">vivo</a> </br> 
-</font></center> 
 
+|                                                                                       |                             |                                                                                                   |                             |                                                                                                           |
+|---------------------------------------------------------------------------------------|-----------------------------|---------------------------------------------------------------------------------------------------|-----------------------------|-----------------------------------------------------------------------------------------------------------|
+| <a href="https://mi2datalab\.github\.io/XAI\-tools/ALEplot\.html">ALEplot</a>         | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/arules\.html">arules</a>                       | &nbsp; &nbsp; &nbsp; &nbsp; |  <a href="https://mi2datalab\.github\.io/XAI\-tools/auditor\.html">auditor</a>                            |
+| <a href="https://mi2datalab\.github\.io/XAI\-tools/ctree\.html">ctree</a>             | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/DALEX\.html">DALEX</a>                         | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/DALEXtra\.html">DALEXtra</a>                           |
+|  <a href="https://mi2datalab\.github\.io/XAI\-tools/EIX\.html">EIX</a>                | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/ExplainPrediction\.html">ExplainPrediction</a> | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/fairness\.html">fairness</a>                           |
+| <a href="https://mi2datalab\.github\.io/XAI\-tools/fastshap\.html">fastshap</a>       | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/flashlight\.html">flashlight</a>               | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/forestmodel\.html">forestmodel</a>                     |
+| <a href="https://mi2datalab\.github\.io/XAI\-tools/fscaret\.html">fscaret</a>         | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/glmnet\.html">glmnet</a>                       | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/iBreakDown\.html">iBreakDown</a>                       |
+| <a href="https://mi2datalab\.github\.io/XAI\-tools/ICEbox\.html">ICEbox</a>           | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/iml\.html">iml</a>                             | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/ingredients\.html">ingredients</a>                     |
+| <a href="https://mi2datalab\.github\.io/XAI\-tools/kknn\.html">kknn</a>               | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/naivebayes\.html">naivebayes</a>               | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/lime\.html">lime</a>                                   |
+| <a href="https://mi2datalab\.github\.io/XAI\-tools/live\.html">live</a>               | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/mcr\.html">mcr</a>                             | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/modelDown\.html">modelDown</a>                         |
+| <a href="https://mi2datalab\.github\.io/XAI\-tools/modelStudio\.html">modelStudio</a> | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/pdp\.html">pdp</a>                             | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/randomForestExplainer\.html">randomForestExplainer</a> |
+| <a href="https://mi2datalab\.github\.io/XAI\-tools/shapper\.html">shapper</a>         | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/smbinning\.html">smbinning</a>                 | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/survxai\.html">survxai</a>                             |
+| <a href="https://mi2datalab\.github\.io/XAI\-tools/vip\.html">vip</a>                 | &nbsp; &nbsp; &nbsp; &nbsp; | <a href="https://mi2datalab\.github\.io/XAI\-tools/vivo\.html">vivo</a>                           | &nbsp; &nbsp; &nbsp; &nbsp; |                                                                                                           |
+
+</font></center>
 <center>
 ```{r echo=FALSE, fig.cap="Partial Dependence Porfiles for fare variable from the Titanic data set generated with DALEX(top-left), flashlight(right-top), iml(left-bottom), pdp(right-bottom).  We can see that the profiles differs. It is due to the fact that profiles are evaluated on different grids of points.", fig.show='hold'}
 knitr::include_graphics("./figures/pdps.png")
