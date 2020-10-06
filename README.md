@@ -8,44 +8,26 @@ Gosiewska](https://www.linkedin.com/in/alicja-gosiewska/), and
 of R packages for eXplainable Artificial Intelligence*. It contains data
 and code necessary to reproduce all analysis made in the paper.
 
-<center>
+# Video
 
-**<font size="6"> Link to the work: </font> </br>**
-<font size="6"><a href="https://arxiv.org/abs/2009.13248">https://arxiv.org/abs/2009.13248</a>
-</font>
-
-</center>
-
-In order to cite our work please use the following BiBTeX entry
-
-    @misc{xailandscape,
-          title={Landscape of R packages for eXplainable Artificial Intelligence}, 
-          author={Szymon Maksymiuk and Alicja Gosiewska and Przemyslaw Biecek},
-          year={2020},
-          journal={arXiv},
-          eprint={2009.13248},
-          archivePrefix={arXiv},
-          primaryClass={cs.LG},
-          URL={https://arxiv.org/abs/2009.13248}
-    }
-
-<a href="https://youtu.be/C7ac4A1t7sc?t=2763">Here</a> is the talk we’ve
-gave on **whyR? 2020** conference about our work.
+<a href="https://youtu.be/C7ac4A1t7sc?t=2763">Find a short introduction
+to this work in this talk presented at WhyR 2020.
+<img src="figures/youtube.png" width=140></a>.
 
 # Abstract
 
-The growing availability of data and computing power fuels the
+*The growing availability of data and computing power fuels the
 development of predictive models. In order to ensure the safe and
 effective functioning of such models, we need methods for exploration,
 debugging, and validation. New methods and tools for this purpose are
 being developed within the eXplainable Artificial Intelligence (XAI)
-subdomain of machine learning. In this work (1) we present the taxonomy
-of methods for model explanations, (2) we identify and compare 27
-packages available in R to perform XAI analysis, (3) we present an
+subdomain of machine learning.* *In this work (1) we present the
+taxonomy of methods for model explanations, (2) we identify and compare
+27 packages available in R to perform XAI analysis, (3) we present an
 example of an application of particular packages, (4) we acknowledge
 recent trends in XAI. The article is primarily devoted to the tools
 available in R, but since it is easy to integrate the Python code, we
-will also show examples for the most popular libraries from Python.
+will also show examples for the most popular libraries from Python.*
 
 # Proposed taxonomy
 
@@ -75,41 +57,7 @@ below. As teaser figures used in the article are presented.
 
 <center>
 
-<div class="figure">
-
-<img src="./figures/pdps.png" alt="Partial Dependence Porfiles for fare variable from the Titanic data set generated with DALEX(top-left), flashlight(right-top), iml(left-bottom), pdp(right-bottom).  We can see that the profiles differs. It is due to the fact that profiles are evaluated on different grids of points." width="1200" />
-
-<p class="caption">
-
-Partial Dependence Porfiles for fare variable from the Titanic data set
-generated with DALEX(top-left), flashlight(right-top), iml(left-bottom),
-pdp(right-bottom). We can see that the profiles differs. It is due to
-the fact that profiles are evaluated on different grids of points.
-
-</p>
-
-</div>
-
-</center>
-
-<center>
-
-<div class="figure">
-
-<img src="./figures/shaps.png" alt="Contribution plots based on Shapley values for the same observation from Titanic dataset generated with DALEX (top-left), flashlight (right-top), iml (left-bottom), pdp (right-bottom)." width="1200" />
-
-<p class="caption">
-
-Contribution plots based on Shapley values for the same observation from
-Titanic dataset generated with DALEX (top-left), flashlight (right-top),
-iml (left-bottom), pdp (right-bottom).
-
-</p>
-
-</div>
-
-</center>
-
+<font size="+2">
 <a href="https://mi2datalab.github.io/XAI-tools/ALEplot.html">ALEplot</a>
 </br>
 <a href="https://mi2datalab.github.io/XAI-tools/arules.html">arules</a>
@@ -168,7 +116,46 @@ iml (left-bottom), pdp (right-bottom).
 </br> <a href="https://mi2datalab.github.io/XAI-tools/vip.html">vip</a>
 </br>
 <a href="https://mi2datalab.github.io/XAI-tools/vivo.html">vivo</a>
-</br>
+</br> </font>
+
+</center>
+
+<center>
+
+<div class="figure">
+
+<img src="./figures/pdps.png" alt="Partial Dependence Porfiles for fare variable from the Titanic data set generated with DALEX(top-left), flashlight(right-top), iml(left-bottom), pdp(right-bottom).  We can see that the profiles differs. It is due to the fact that profiles are evaluated on different grids of points." width="1200" />
+
+<p class="caption">
+
+Partial Dependence Porfiles for fare variable from the Titanic data set
+generated with DALEX(top-left), flashlight(right-top), iml(left-bottom),
+pdp(right-bottom). We can see that the profiles differs. It is due to
+the fact that profiles are evaluated on different grids of points.
+
+</p>
+
+</div>
+
+</center>
+
+<center>
+
+<div class="figure">
+
+<img src="./figures/shaps.png" alt="Contribution plots based on Shapley values for the same observation from Titanic dataset generated with DALEX (top-left), flashlight (right-top), iml (left-bottom), pdp (right-bottom)." width="1200" />
+
+<p class="caption">
+
+Contribution plots based on Shapley values for the same observation from
+Titanic dataset generated with DALEX (top-left), flashlight (right-top),
+iml (left-bottom), pdp (right-bottom).
+
+</p>
+
+</div>
+
+</center>
 
 Versions of all used packages are stored in the renv.lock file and can
 be restored with the `renv` package.
@@ -179,3 +166,21 @@ We did our best to show the entire range of the implemented
 explanations. Please note that the examples may be incomplete. If you
 think something is missing, feel free to make a pull request in the
 [XAI-tools](https://github.com/MI2DataLab/XAI-tools) repository.
+
+# Preprint
+
+Preprint for this work is avaliable at
+<https://arxiv.org/abs/2009.13248> .
+
+In order to cite our work please use the following BiBTeX entry
+
+    @article{xailandscape,
+          title={Landscape of R packages for eXplainable Artificial Intelligence}, 
+          author={Szymon Maksymiuk and Alicja Gosiewska and Przemyslaw Biecek},
+          year={2020},
+          journal={arXiv},
+          eprint={2009.13248},
+          archivePrefix={arXiv},
+          primaryClass={cs.LG},
+          URL={https://arxiv.org/abs/2009.13248}
+    }
