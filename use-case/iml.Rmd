@@ -1,5 +1,5 @@
 ---
-title: "iml"
+title: "The iml R package"
 date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
@@ -8,14 +8,15 @@ output:
 ---
 
   
-This report aims to present the capabilities of the package `iml`. 
+  
+This report aims to present the capabilities of the package `iml`.
 
-The document contains a use-case of on the [titanic_imputed](https://modeloriented.github.io/DALEX/reference/titanic.html) data set described in Section real-world use-case of the article.
+The document is a part of the paper "Landscape of R packages for eXplainable Machine Learning", S. Maksymiuk, A. Gosiewska, and P. Biecek. 
+(https://arxiv.org/abs/2009.13248). It contains a real life use-case with a hand of [titanic_imputed](https://modeloriented.github.io/DALEX/reference/titanic.html) data set described in Section *Example gallery for XAI packages* of the article.
 
-We did our best to show the entire range of the implemented explanations. Please note that the examples may be incomplete. If you think something is missing, feel free to make a pull request at the GitHub repository [MI2DataLab/XAI-tools](https://github.com/MI2DataLab/XAI-tools)
+We did our best to show the entire range of the implemented explanations. Please note that the examples may be incomplete. If you think something is missing, feel free to make a pull request at the GitHub repository [MI2DataLab/XAI-tools](https://github.com/MI2DataLab/XAI-tools).
 
-The document is a part of the paper "Landscape of R packages for ExplainableMachine Learning", S. Maksymiuk, A. Gosiewska, and P. Biecek. 
-The list of use-cases for all packages included in the article is [here](https://mi2datalab.github.io/XAI-tools/).  
+The list of use-cases for all packages included in the article is [here](http://xai-tools.drwhy.ai/).  
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
@@ -169,4 +170,10 @@ pred_fun <- function(X.model, newdata) {
 predictor <- Predictor$new(rf_model, data = X, y = titanic_imputed$survived, predict.function = pred_fun)
 ice <- FeatureEffect$new(predictor, feature = "fare", method = "ice")
 plot(ice)
+```
+
+# Session info
+
+```{r}
+sessionInfo()
 ```

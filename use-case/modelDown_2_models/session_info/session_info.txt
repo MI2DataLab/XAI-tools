@@ -8,7 +8,7 @@
  collate  Polish_Poland.1250          
  ctype    Polish_Poland.1250          
  tz       Europe/Warsaw               
- date     2020-09-07                  
+ date     2020-10-08                  
 
 - Packages -------------------------------------------------------------------
  package     * version   date       lib source        
@@ -95,5 +95,5 @@
  yaml          2.2.1     2020-02-01 [1] CRAN (R 3.6.3)
 
 [1] D:/Alicja/TMP/XAI-toolkits-comparison/renv/library/R-3.6/x86_64-w64-mingw32
-[2] C:/Users/user/AppData/Local/Temp/RtmpYTsZdN/renv-system-library
+[2] C:/Users/user/AppData/Local/Temp/RtmpcxObtJ/renv-system-library
 [3] C:/Program Files/R/R-3.6.1/library
