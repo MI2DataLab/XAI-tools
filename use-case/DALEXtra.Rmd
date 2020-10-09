@@ -114,6 +114,8 @@ champion_challenger(list(fm, oc, tt), title = "DALEXtra: Champion - Challenger a
 ```
 
 
+# Session info
+
 ```{r}
 sessionInfo()
 ```

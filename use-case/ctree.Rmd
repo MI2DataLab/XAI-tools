@@ -50,5 +50,9 @@ model <- ctree(survived~., titanic_imputed)
 ```{r, fig.width=18, fig.height=10}
 plot(model)
 ```
+# Session info
 
+```{r}
+sessionInfo()
+````
 

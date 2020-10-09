@@ -385,7 +385,7 @@ cp <- light_ice(fl, v = "fare", seed = 123, n_max = 200)
 plot(cp)
 ```
 
-## Session info
+# Session info
 
 ```{r}
 sessionInfo()
