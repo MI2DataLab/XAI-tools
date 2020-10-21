@@ -330,6 +330,22 @@ plot(surr)
 
 ```
 
+
+# Model diagnostics
+
+## Residual vs variables plots
+
+```{r}
+custom_predict <- function(X.model, new_data) {
+  predict(X.model, new_data)$predictions[,2]
+}
+fl <- flashlight(model = ranger_model, data = titanic_imputed, y = "survived", label = "Titanic Ranger",
+                 metrics = list(auc = AUC), predict_function = custom_predict)
+
+plot(light_profile(fl, v = "fare", type = "residual", stats = "quartiles"))
+```
+
+
 # Predict Parts
 
 ## BreakDown
