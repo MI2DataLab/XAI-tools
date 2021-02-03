@@ -160,7 +160,7 @@ table_2_r[["RowFactor1"]] <- "\\centering\\arraybackslash \\rot{\\rlap{R}}"
 table_2_python[["RowFactor1"]] <- "\\centering\\arraybackslash \\rot{\\rlap{Python}}"
 
 table_2 <- rbind(table_2_r, table_2_python)
-table_2 <- table_2[,c(7,1:6)]
+table_2 <- table_2[,c(8,1:7)]
 colnames(table_2) <- c("", "Package", "License", 
                        "\\begin{tabular}[c]{@{}c@{}}Date of \\\\last update \\end{tabular}", 
                        "\\begin{tabular}[c]{@{}c@{}}Last \\\\version \\end{tabular}", 
