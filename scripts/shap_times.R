@@ -73,5 +73,5 @@ plot_iml <- eval(expr = parse(text=code_to_eval_iml))
 plot_shapper <- eval(expr = parse(text=code_to_eval_shapper))
 
 png("figures/pdps2.png", height = 900, width = 1200, units="px")
-grid.arrange(plot_DALEX, plot_flashlight, plot_iml, plot_pdp, ncol = 2) 
+grid.arrange(plot_DALEX, plot_fastshap, plot_iml, plot_shapper, ncol = 2) 
 dev.off()

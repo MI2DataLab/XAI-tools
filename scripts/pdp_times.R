@@ -68,7 +68,7 @@ plot_flashlight <- eval(expr = parse(text=code_to_eval_flashlight))
 plot_iml <- eval(expr = parse(text=code_to_eval_iml))
 plot_pdp <- eval(expr = parse(text=code_to_eval_pdp))
 
-png("figures/pdps2.png", height = 900, width = 1200, units="px")
+png("figures/pdps.png", height = 900, width = 1200, units="px")
 grid.arrange(plot_DALEX, plot_flashlight, plot_iml, plot_pdp, ncol = 2) 
 dev.off()
 
