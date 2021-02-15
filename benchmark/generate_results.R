@@ -20,6 +20,9 @@ packages_times %>%
   unique() %>%
   pivot_wider(names_from = type, values_from = evaluation_time)  %>%
   mutate_all(~replace(., is.na(.), "-")) %>%
-  bind_cols(summary_time[, c("sum", "n")]) %>%
+  bind_cols(summary_time[, c("sum", "n")]) %>% 
+  select("pkg_name", "Model parts", "Model profile", "Model diagnostics", 
+           "Predict parts", "Predict profile", "Predict diagnostics", "Report", 
+           "sum", "n") %>%
   xtable() %>%
   print(include.rownames=FALSE)
