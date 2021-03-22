@@ -87,6 +87,7 @@ get_github_stars <- function(repo){
 
 
 table_2_r <- lapply(names(r_packages), function(package){
+  print(package)
   cran_url <- paste0("https://CRAN.R-project.org/package=", package)
   cran_html <- read_html(cran_url)
   
@@ -123,7 +124,8 @@ pip_last_update <- function(package){
 }
 
 pip_first_release <- function(package){
-  Sys.sleep(runif(1,2))
+  print(paste("Release", package))
+  Sys.sleep(runif(1))
   pip_url <- paste0("https://pypi.org/project/", package,"/#history")
   pip_html <- read_html(pip_url)
   pip_body_nodes <- pip_html %>% 
@@ -135,6 +137,7 @@ pip_first_release <- function(package){
 }
 
 pip_last_version <- function(package){
+  print(paste("Last version", package))
   pip_url <- paste0("https://pypi.org/project/", package)
   pip_html <- read_html(pip_url)
   pip_body_nodes <- pip_html %>% 
@@ -156,6 +159,8 @@ table_2_python <- list(
   data.frame()  %>%
   setNames(c("Package", "License", "Date of\\last update","Last Version", "GitHub\\stars", "CRAN\\downloads", "Date of\\first release"))
 
+
+
 table_2_r[["RowFactor1"]] <- "\\centering\\arraybackslash \\rot{\\rlap{R}}"
 table_2_python[["RowFactor1"]] <- "\\centering\\arraybackslash \\rot{\\rlap{Python}}"
 
@@ -171,9 +176,6 @@ colnames(table_2) <- c("", "Package", "License",
 kable(table_2, format = "latex", escape = FALSE,
       align = c("c","l","c","c", "c","r","r","c")) %>% 
   collapse_rows(columns = 1)
-
-
-
 
 
 
