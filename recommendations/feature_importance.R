@@ -32,35 +32,25 @@ exp_iml <-Predictor$new(ranger_model,
                         y = titanic_imputed$survived,
                         predict.function = iml_predict)
 
+### Feature importance ###
+
+#DALEX
+fi_dalex <- model_parts(exp_dalex, 
+                        B = 10,
+                        loss_function = loss_one_minus_auc)
+plot_dalex <- plot(fi_dalex)
+
+#flashlight
+fi_flashlight <- light_importance(exp_flashlight,
+                                  m_repetitions = 10)
+plot_flashlight <- plot(fi_flashlight, fill = "darkred")
 
 
-
-### Partal Dependence Profile ###
-
-# DALEX
-pdp_dalex <- model_profile(exp_dalex,
-                           variables = "fare",
-                           type = "partial",
-                           N = 1000,
-                           grid_points = 101,
-                           variable_splits_type = "uniform")
-plot_dalex <- plot(pdp_dalex)
-
-# flashlight
-pdp_flashlight <- light_profile(exp_flashlight,
-                                v = "fare",
-                                type = "partial dependence",
-                                pd_n_max = 1000,
-                                n_bins = 101,
-                                cut_type = "equal")
-plot_flashlight <- plot(pdp_flashlight)
-
-# iml 
-pdp_iml <- FeatureEffect$new(exp_iml,
-                             feature = "fare",
-                             method = "pdp",
-                             grid.size = 101)
-plot_iml <- plot(pdp_iml)
+# iml
+fi_iml <- FeatureImp$new(exp_iml,
+                         loss = "logLoss",
+                         n.repetitions = 10)
+plot_iml <- plot(fi_iml)
 
 
 
@@ -68,4 +58,5 @@ p <- gridExtra::grid.arrange(plot_dalex,
                              plot_flashlight, 
                              plot_iml, 
                              ncol = 1)
-ggsave("figures/rec_pdp.png", p, width = 4, height = 10)
+ggsave("figures/rec_variable_importance.png", p, width = 4, height = 10)
+
