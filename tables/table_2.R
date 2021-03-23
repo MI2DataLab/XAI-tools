@@ -13,7 +13,7 @@ r_packages["ALEPlot"] <- NA
 r_packages["auditor"] <- "ModelOriented/auditor"
 r_packages["DALEX"] <- "ModelOriented/DALEX"
 r_packages["DALEXtra"] <- "ModelOriented/DALEXtra"
-# r_packages["EIX"] <- "ModelOriented/EIX"
+r_packages["EIX"] <- "ModelOriented/EIX"
 r_packages["ExplainPrediction"] <- NA
 r_packages["fairness"] <- "kozodoi/fairness"
 r_packages["fastshap"] <- "bgreenwell/fastshap"
