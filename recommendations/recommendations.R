@@ -1,4 +1,9 @@
-# Recommendations for a gentle introduction to XAI
+# This file includes the R code used in the article, entitled
+# "Landscape of R packages for eXplainable Artificial Intelligence".
+# Szymon Maksymiuk, Alicja Gosiewska, Przemysław Biecek
+# The R Journal
+
+# Section: Recommendations for a gentle introduction to XAI
 
 data(titanic_imputed, package = "DALEX")
 ranger_model <- ranger::ranger(survived~., data = titanic_imputed,
